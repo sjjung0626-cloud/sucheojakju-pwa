@@ -1,17 +1,20 @@
-const CACHE_NAME = "sucheojakju-pwa-v4-1-5";
-const APP_SHELL = [
-  "./",
-  "./index.html",
-  "./manifest.webmanifest",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png",
-  "./icons/icon-maskable-512.png"
+const CACHE_NAME = "sucheojakju-pwa-v4.4.9";
+const ROOT = new URL("./", self.location.href);
+const INDEX = new URL("index.html", ROOT).href;
+const FILES = [
+  new URL("./", ROOT).href,
+  INDEX,
+  new URL("404.html", ROOT).href,
+  new URL("manifest.webmanifest", ROOT).href,
+  new URL("icons/icon-192.png", ROOT).href,
+  new URL("icons/icon-512.png", ROOT).href,
+  new URL("icons/icon-maskable-512.png", ROOT).href
 ];
 
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(APP_SHELL))
+      .then(cache => cache.addAll(FILES))
       .then(() => self.skipWaiting())
   );
 });
@@ -19,40 +22,40 @@ self.addEventListener("install", event => {
 self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys()
-      .then(keys => Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-      ))
+      .then(keys => Promise.all(keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))))
       .then(() => self.clients.claim())
   );
 });
 
 self.addEventListener("fetch", event => {
-  if (event.request.method !== "GET") return;
-  const requestUrl = new URL(event.request.url);
-  if (requestUrl.origin !== self.location.origin) return;
+  const request = event.request;
+  if (request.method !== "GET") return;
+  const url = new URL(request.url);
+  if (url.origin !== self.location.origin) return;
 
-  if (event.request.mode === "navigate") {
+  if (request.mode === "navigate") {
     event.respondWith(
-      fetch(event.request)
+      fetch(request, {cache: "no-store"})
         .then(response => {
-          const copy = response.clone();
-          caches.open(CACHE_NAME).then(cache => cache.put("./index.html", copy));
+          if (response.ok) {
+            caches.open(CACHE_NAME).then(cache => cache.put(INDEX, response.clone()));
+          }
           return response;
         })
-        .catch(() => caches.match("./index.html"))
+        .catch(async () => (await caches.match(request)) || (await caches.match(INDEX)))
     );
     return;
   }
 
   event.respondWith(
-    caches.match(event.request).then(cached => {
-      if (cached) return cached;
-      return fetch(event.request).then(response => {
-        if (!response || response.status !== 200 || response.type !== "basic") return response;
-        const copy = response.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(event.request, copy));
-        return response;
-      });
+    caches.match(request).then(cached => {
+      const network = fetch(request)
+        .then(response => {
+          if (response.ok) caches.open(CACHE_NAME).then(cache => cache.put(request, response.clone()));
+          return response;
+        })
+        .catch(() => cached);
+      return cached || network;
     })
   );
 });

@@ -1,8 +1,8 @@
-const CACHE_NAME = "sucheojakju-pwa-v4.5.0";
+const CACHE_NAME = "sucheojakju-pwa-v4.5.4";
 const ROOT = new URL("./", self.location.href);
 const INDEX = new URL("index.html", ROOT).href;
 
-const FILES = [
+const APP_SHELL = [
   new URL("./", ROOT).href,
   INDEX,
   new URL("404.html", ROOT).href,
@@ -15,7 +15,7 @@ const FILES = [
 self.addEventListener("install", event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(FILES))
+      .then(cache => cache.addAll(APP_SHELL))
       .then(() => self.skipWaiting())
   );
 });
@@ -24,10 +24,18 @@ self.addEventListener("activate", event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(
-        keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
+        keys
+          .filter(key => key !== CACHE_NAME)
+          .map(key => caches.delete(key))
       ))
       .then(() => self.clients.claim())
   );
+});
+
+self.addEventListener("message", event => {
+  if (event.data === "SKIP_WAITING") {
+    self.skipWaiting();
+  }
 });
 
 self.addEventListener("fetch", event => {

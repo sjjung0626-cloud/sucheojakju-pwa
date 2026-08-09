@@ -7,7 +7,7 @@
   <meta name="description" content="내 삶의 주인으로 살아가기 위한 정체성·습관·복귀 시스템" />
   
   
-  <title>수처작주 | 내 삶의 주인 · v4.5.0</title>
+  <title>수처작주 | 내 삶의 주인 · v4.5.4</title>
   <style>
     :root{
       --bg:#f4f2ec; --surface:#fffdf8; --ink:#20302b; --muted:#6e7773;
@@ -2028,6 +2028,266 @@
       background:#e7f3ee;
     }
 
+
+    .save-state-line{
+      min-height:0;
+      margin-top:7px;
+      font-size:.72rem;
+      font-weight:850;
+      line-height:1.45;
+      text-align:center;
+      color:var(--muted);
+      transition:.18s ease;
+    }
+    .save-state-line.success{
+      min-height:20px;
+      padding:7px 9px;
+      border-radius:10px;
+      background:#e6f2ed;
+      color:#245b4c;
+    }
+    .save-state-line.warning{
+      min-height:20px;
+      padding:7px 9px;
+      border-radius:10px;
+      background:#fff3df;
+      color:#8b5a20;
+    }
+    .unified-repeat-settings{
+      margin-top:14px;
+      padding:13px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:#faf9f5;
+    }
+    .monthly-rule-panel{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-top:9px;
+    }
+    .monthly-rule-panel select{
+      flex:1;
+      min-width:0;
+    }
+    .repeat-settings select,
+    .repeat-settings input{
+      font-size:.82rem;
+    }
+    @media(max-width:520px){
+      .monthly-rule-panel{
+        gap:5px;
+      }
+      .monthly-rule-panel span{
+        font-size:.68rem;
+        white-space:nowrap;
+      }
+      .repeat-date-range{
+        grid-template-columns:1fr 1fr!important;
+        gap:7px!important;
+      }
+    }
+
+
+    .monthly-rule-panel-multi,
+    #scheduleMonthlyWeekdayPanel,
+    #habitMonthlyWeekdayPanel{
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .monthly-weekday-multiselect,
+    .stop-weekday-picker{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(34px,1fr));
+      gap:6px;
+      width:100%;
+      margin-top:8px;
+    }
+    .monthly-weekday-multiselect button,
+    .stop-weekday-picker button{
+      min-width:0;
+      margin:0;
+      padding:9px 3px;
+      border:1px solid var(--line);
+      border-radius:10px;
+      background:#fff;
+      color:var(--muted);
+      font-size:.72rem;
+      font-weight:900;
+    }
+    .monthly-weekday-multiselect button.selected,
+    .stop-weekday-picker button.selected{
+      border-color:var(--brand);
+      background:var(--brand);
+      color:#fff;
+    }
+    .habit-category-tabs{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:7px;
+      margin:16px 0;
+      padding:5px;
+      border:1px solid var(--line);
+      border-radius:15px;
+      background:#eceae4;
+    }
+    .habit-category-tabs button{
+      margin:0;
+      padding:11px 8px;
+      border:0;
+      border-radius:11px;
+      background:transparent;
+      color:var(--muted);
+      font-weight:900;
+    }
+    .habit-category-tabs button.active{
+      background:#fffdf8;
+      color:var(--brand);
+      box-shadow:0 3px 10px rgba(23,63,53,.10);
+    }
+    .habit-category-panel{display:none}
+    .habit-category-panel.active{display:block}
+    .stop-habit-principle{
+      border-left:5px solid #a56857;
+    }
+    .stop-habit-card{
+      border-left:5px solid #a56857;
+    }
+    .stop-habit-card .stop-habit-main{
+      font-weight:900;
+      color:#633f34;
+    }
+    .today-stop-habit-row{
+      display:grid;
+      grid-template-columns:minmax(105px,.9fr) minmax(130px,1.2fr) minmax(110px,.9fr);
+      gap:7px;
+      align-items:center;
+      padding:9px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .today-stop-habit-row:last-child{border-bottom:0}
+    .today-stop-habit-row b{
+      font-size:.76rem;
+      line-height:1.35;
+    }
+    .today-stop-habit-row small{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.6rem;
+      line-height:1.35;
+    }
+    .today-stop-habit-row select,
+    .today-stop-habit-row input{
+      min-width:0;
+      margin:0;
+      padding:8px 9px;
+      font-size:.66rem;
+    }
+    .behavior-standards-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .behavior-standard-card{
+      min-width:0;
+      margin:0;
+      padding:13px;
+    }
+    .behavior-standard-card h3{
+      margin:0 0 9px;
+      font-size:.9rem;
+    }
+    .behavior-standard-card.do{border-left:5px solid #32735f}
+    .behavior-standard-card.stop{border-left:5px solid #a56857}
+    .behavior-action-item{
+      padding:8px 0;
+      border-bottom:1px solid var(--line);
+    }
+    .behavior-action-item:last-child{border-bottom:0}
+    .behavior-action-item b{
+      display:block;
+      font-size:.73rem;
+      line-height:1.35;
+    }
+    .behavior-action-item span{
+      display:block;
+      margin-top:3px;
+      color:var(--muted);
+      font-size:.62rem;
+      line-height:1.45;
+    }
+    @media(max-width:640px){
+      .behavior-standards-grid{grid-template-columns:1fr}
+      .today-stop-habit-row{
+        grid-template-columns:minmax(90px,.8fr) minmax(105px,1fr);
+      }
+      .today-stop-habit-row input{
+        grid-column:1/-1;
+      }
+    }
+
+
+    .bottom-nav-inner{
+      grid-template-columns:repeat(5,minmax(0,1fr))!important;
+    }
+    .nav-btn{
+      min-width:0;
+      padding:7px 1px!important;
+      font-size:.62rem!important;
+      letter-spacing:-.04em;
+    }
+    .nav-btn span{
+      font-size:1.12rem!important;
+    }
+    .stop-action-hero{
+      background:linear-gradient(135deg,#6f4a40,#8b6658);
+    }
+
+    .monthly-day-rule-panel{
+      display:block!important;
+      width:100%;
+    }
+    .monthly-day-multiselect{
+      display:grid;
+      grid-template-columns:repeat(7,minmax(0,1fr));
+      gap:5px;
+      width:100%;
+    }
+    .monthly-day-multiselect button{
+      min-width:0;
+      margin:0;
+      padding:8px 2px;
+      border:1px solid var(--line);
+      border-radius:9px;
+      background:#fff;
+      color:var(--muted);
+      font-size:.68rem;
+      font-weight:900;
+    }
+    .monthly-day-multiselect button.selected{
+      border-color:var(--brand);
+      background:var(--brand);
+      color:#fff;
+      box-shadow:0 3px 8px rgba(23,63,53,.14);
+    }
+
+    @media(max-width:420px){
+      .nav-btn{
+        font-size:.56rem!important;
+      }
+      .nav-btn span{
+        font-size:1.02rem!important;
+      }
+      .monthly-day-multiselect{
+        gap:4px;
+      }
+      .monthly-day-multiselect button{
+        padding:7px 1px;
+        font-size:.62rem;
+      }
+    }
+
 </style>
 
   <meta name="theme-color" content="#173f35" />
@@ -2095,6 +2355,7 @@
           </div>
         </div>
         <div class="autosave-status" id="identityChoiceAutosaveStatus">선택하면 오늘 기록에 자동 저장됩니다.</div>
+        <div class="save-state-line" id="principlesRecordStatus" role="status" aria-live="polite"></div>
       </div>
 
       <div class="section-title-action-row">
@@ -2119,6 +2380,7 @@
         <input id="tomorrowActionCustom" style="display:none;margin-top:10px" placeholder="직접 입력해주세요" />
 
         <div class="autosave-status" id="todayAutosaveStatus">입력한 내용은 이 기기에 자동 저장됩니다.</div>
+        <div class="save-state-line" id="reflectionSaveStatus" role="status" aria-live="polite"></div>
       </div>
 
       <h2 class="section-title">나의 정체성 체계
@@ -2148,6 +2410,26 @@
           이 내용은 정체성 탭에서 저장한 원칙·마무리 기록입니다.
         </div>
       </div>
+      </div>
+
+      <div class="today-behavior-standards">
+        <div class="section-title-action-row">
+          <h2 class="section-title" id="selectedBehaviorTitle">오늘의 행동 기준
+            <span>실천할 행동과 멈출 행동을 함께 읽고 선택한 날짜의 기록으로 남깁니다.</span>
+          </h2>
+          <button type="button" class="record-save-button" id="saveBehaviorStandards">행동 기준 저장</button>
+        </div>
+        <div class="behavior-standards-grid">
+          <div class="card behavior-standard-card do">
+            <h3>실천할 행동</h3>
+            <div id="todayBehaviorDoList"></div>
+          </div>
+          <div class="card behavior-standard-card stop">
+            <h3>멈출 행동</h3>
+            <div id="todayBehaviorStopList"></div>
+          </div>
+        </div>
+        <div class="save-state-line" id="behaviorStandardsStatus" role="status" aria-live="polite"></div>
       </div>
 
       <h2 class="section-title">달력 <span>날짜를 선택하면 일별 정체성과 아래 일정이 해당 날짜 내용으로 변경됩니다.</span></h2>
@@ -2180,6 +2462,7 @@
           </div>
         </div>
         <div class="compact-agenda selected-day-agenda" id="todaySchedulePlanner"></div>
+        <div class="save-state-line" id="scheduleRecordStatus" role="status" aria-live="polite"></div>
       </div>
 
       <div class="today-record-archive">
@@ -2275,6 +2558,7 @@
             <button class="primary" id="saveShake">기록하고 선택하기</button>
             <button class="secondary" id="restartShake">다시 작성</button>
           </div>
+          <div class="save-state-line" id="shakeSaveStatus" role="status" aria-live="polite"></div>
         </div>
       </div>
     
@@ -2283,9 +2567,9 @@
 <section id="view-habits" class="view">
 
       <div class="hero">
-        <div class="eyebrow">나의 시스템</div>
+        <div class="eyebrow">좋은 습관</div>
         <h1>작게 선택하고, 반복하고, 돌아온다.</h1>
-        <p>모든 습관은 정체성·신호·정상 행동·최소 행동·회복 행동으로 설계합니다.</p>
+        <p>정체성·신호·정상 행동·최소 행동·회복 행동으로 좋은 습관을 설계합니다.</p>
       </div>
 
       <h2 class="section-title habit-library-title habits-design-title">습관 설계 및 수정
@@ -2304,12 +2588,43 @@
         <button type="button" class="record-save-button" id="saveHabitsRecord">오늘 일정 반영</button>
       </div>
       <div class="habit-sync-guide">
-        오늘 요일에 해당하는 습관만 설정된 시작·종료시간과 실행 내용으로 오늘 탭 일정에 생성·갱신됩니다.
+        습관의 반복·시작시간·종료시간·실행 내용을 저장하면 오늘 탭 일정과 선택한 날짜의 일정에 연동됩니다.
       </div>
+      <div class="save-state-line" id="habitsRecordStatus" role="status" aria-live="polite"></div>
       <div id="todayHabits"></div>
 
       <button class="primary wide habit-add-after-today" id="addHabitBtn">＋ 새 습관 추가</button>
       <div id="habitsList"></div>
+
+</section>
+
+<section id="view-stop" class="view">
+
+      <div class="hero stop-action-hero">
+        <div class="eyebrow">멈출 행동</div>
+        <h1>알아차리고, 멈추고, 더 나은 행동으로 바꾼다.</h1>
+        <p>하지 말아야 할 행동과 유발 상황, 대신 할 행동, 반성·복귀 기준을 관리합니다.</p>
+      </div>
+
+      <h2 class="section-title habit-library-title habits-design-title">멈출 행동 설계 및 수정
+          <span>하지 않기로 한 행동과 유발 상황, 대신 할 행동, 반성·복귀 기준을 함께 설계합니다.</span>
+        </h2>
+        <div class="card stop-habit-principle">
+          <h3>억지로 참기보다 대체 행동을 준비합니다</h3>
+          <p>멈출 행동을 알아차리고, 그 순간 대신 할 작은 행동을 정해 반복적으로 복귀합니다.</p>
+        </div>
+
+        <div class="section-title-action-row habits-execution-title">
+          <h2 class="section-title">오늘의 멈출 행동
+            <span>오늘 반복 조건에 해당하는 행동을 확인하고 지킴·알아차림·놓침·복귀를 기록합니다.</span>
+          </h2>
+          <button type="button" class="record-save-button" id="saveStopHabitsToday">오늘 기록 저장</button>
+        </div>
+        <div id="todayStopHabits"></div>
+        <div class="save-state-line" id="stopHabitsRecordStatus" role="status" aria-live="polite"></div>
+
+        <button class="primary wide habit-add-after-today stop-habit-add" id="addStopHabitBtn">＋ 멈출 행동 추가</button>
+        <div id="stopHabitsList"></div>
 
 </section>
 </main>
@@ -2319,6 +2634,7 @@
     <button class="nav-btn active" data-view="today"><span>⌂</span>오늘</button>
     <button class="nav-btn" data-view="identity"><span>◆</span>정체성</button>
     <button class="nav-btn" data-view="habits"><span>✓</span>습관</button>
+    <button class="nav-btn" data-view="stop"><span>⊘</span>멈출 행동</button>
     <button class="nav-btn" data-view="shake"><span>◎</span>흔들릴 때</button>
   </div>
 </nav>
@@ -2330,22 +2646,94 @@
     <input type="hidden" id="habitId" />
     <label>습관 이름</label><input id="habitName" placeholder="예: 아침 5km 달리기" />
     <label>연결된 정체성</label><select id="habitIdentity"></select>
-    <label>요일</label>
     <input type="hidden" id="habitDays" />
-    <div class="habit-weekday-picker" id="habitWeekdayPicker" aria-label="습관 실행 요일">
-      <button type="button" data-habit-weekday="일">일</button>
-      <button type="button" data-habit-weekday="월">월</button>
-      <button type="button" data-habit-weekday="화">화</button>
-      <button type="button" data-habit-weekday="수">수</button>
-      <button type="button" data-habit-weekday="목">목</button>
-      <button type="button" data-habit-weekday="금">금</button>
-      <button type="button" data-habit-weekday="토">토</button>
+    <div class="repeat-settings unified-repeat-settings">
+      <label for="habitRepeatType">반복</label>
+      <select id="habitRepeatType">
+        <option value="none">반복 안 함</option>
+        <option value="daily">매일</option>
+        <option value="weekly">매주</option>
+        <option value="monthly">매월</option>
+      </select>
+
+      <div id="habitRepeatOptions">
+        <div class="repeat-date-range">
+          <div>
+            <label for="habitRepeatStart">반복 시작일</label>
+            <input type="date" id="habitRepeatStart">
+          </div>
+          <div>
+            <label for="habitRepeatUntil">반복 종료일</label>
+            <input type="date" id="habitRepeatUntil">
+          </div>
+        </div>
+
+        <div class="repeat-grid">
+          <div>
+            <label for="habitRepeatInterval">반복 간격</label>
+            <div class="repeat-interval-row">
+              <span>매</span>
+              <input type="number" id="habitRepeatInterval" min="1" max="12" value="1">
+              <span id="habitRepeatUnit">주</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="habitWeekdayOptions">
+          <label>매주 반복할 요일</label>
+          <div class="habit-weekday-picker" id="habitWeekdayPicker" aria-label="습관 실행 요일">
+            <button type="button" data-habit-weekday="일">일</button>
+            <button type="button" data-habit-weekday="월">월</button>
+            <button type="button" data-habit-weekday="화">화</button>
+            <button type="button" data-habit-weekday="수">수</button>
+            <button type="button" data-habit-weekday="목">목</button>
+            <button type="button" data-habit-weekday="금">금</button>
+            <button type="button" data-habit-weekday="토">토</button>
+          </div>
+          <div class="habit-weekday-tools">
+            <button type="button" class="secondary" id="habitEveryDay">매일 선택</button>
+            <button type="button" class="secondary" id="habitClearDays">선택 해제</button>
+          </div>
+        </div>
+
+        <div id="habitMonthlyOptions" style="display:none">
+          <label for="habitMonthlyMode">매월 반복 방식</label>
+          <select id="habitMonthlyMode">
+            <option value="day">날짜 지정</option>
+            <option value="nthWeekday">몇 번째 요일 지정</option>
+          </select>
+
+          <div id="habitMonthlyDayPanel" class="monthly-rule-panel monthly-day-rule-panel">
+            <input type="hidden" id="habitMonthDay" value="1" />
+            <div class="monthly-day-multiselect" id="habitMonthDayPicker" aria-label="습관 매월 반복 날짜 여러 개 선택">
+              <button type="button" value="1" data-month-day-scope="habit" aria-pressed="false">1</button><button type="button" value="2" data-month-day-scope="habit" aria-pressed="false">2</button><button type="button" value="3" data-month-day-scope="habit" aria-pressed="false">3</button><button type="button" value="4" data-month-day-scope="habit" aria-pressed="false">4</button><button type="button" value="5" data-month-day-scope="habit" aria-pressed="false">5</button><button type="button" value="6" data-month-day-scope="habit" aria-pressed="false">6</button><button type="button" value="7" data-month-day-scope="habit" aria-pressed="false">7</button><button type="button" value="8" data-month-day-scope="habit" aria-pressed="false">8</button><button type="button" value="9" data-month-day-scope="habit" aria-pressed="false">9</button><button type="button" value="10" data-month-day-scope="habit" aria-pressed="false">10</button><button type="button" value="11" data-month-day-scope="habit" aria-pressed="false">11</button><button type="button" value="12" data-month-day-scope="habit" aria-pressed="false">12</button><button type="button" value="13" data-month-day-scope="habit" aria-pressed="false">13</button><button type="button" value="14" data-month-day-scope="habit" aria-pressed="false">14</button><button type="button" value="15" data-month-day-scope="habit" aria-pressed="false">15</button><button type="button" value="16" data-month-day-scope="habit" aria-pressed="false">16</button><button type="button" value="17" data-month-day-scope="habit" aria-pressed="false">17</button><button type="button" value="18" data-month-day-scope="habit" aria-pressed="false">18</button><button type="button" value="19" data-month-day-scope="habit" aria-pressed="false">19</button><button type="button" value="20" data-month-day-scope="habit" aria-pressed="false">20</button><button type="button" value="21" data-month-day-scope="habit" aria-pressed="false">21</button><button type="button" value="22" data-month-day-scope="habit" aria-pressed="false">22</button><button type="button" value="23" data-month-day-scope="habit" aria-pressed="false">23</button><button type="button" value="24" data-month-day-scope="habit" aria-pressed="false">24</button><button type="button" value="25" data-month-day-scope="habit" aria-pressed="false">25</button><button type="button" value="26" data-month-day-scope="habit" aria-pressed="false">26</button><button type="button" value="27" data-month-day-scope="habit" aria-pressed="false">27</button><button type="button" value="28" data-month-day-scope="habit" aria-pressed="false">28</button><button type="button" value="29" data-month-day-scope="habit" aria-pressed="false">29</button><button type="button" value="30" data-month-day-scope="habit" aria-pressed="false">30</button><button type="button" value="31" data-month-day-scope="habit" aria-pressed="false">31</button>
+            </div>
+          </div>
+
+          <div id="habitMonthlyWeekdayPanel" class="monthly-rule-panel" style="display:none">
+            <span>매월</span>
+            <select id="habitMonthWeek" aria-label="습관 매월 몇 번째 주">
+              <option value="1">첫 번째</option>
+              <option value="2">두 번째</option>
+              <option value="3">세 번째</option>
+              <option value="4">네 번째</option>
+              <option value="5">다섯 번째</option>
+              <option value="last">마지막</option>
+            </select>
+            <input type="hidden" id="habitMonthWeekday" value="0" />
+            <div class="monthly-weekday-multiselect" id="habitMonthWeekdayPicker" aria-label="습관 매월 반복 여러 요일 선택">
+              <button type="button" value="0" data-month-weekday-scope="habit" aria-pressed="false">일</button><button type="button" value="1" data-month-weekday-scope="habit" aria-pressed="false">월</button><button type="button" value="2" data-month-weekday-scope="habit" aria-pressed="false">화</button><button type="button" value="3" data-month-weekday-scope="habit" aria-pressed="false">수</button><button type="button" value="4" data-month-weekday-scope="habit" aria-pressed="false">목</button><button type="button" value="5" data-month-weekday-scope="habit" aria-pressed="false">금</button><button type="button" value="6" data-month-weekday-scope="habit" aria-pressed="false">토</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="repeat-exclusions">
+          <label><input type="checkbox" id="habitExcludeSunday"> 일요일 제외</label>
+          <label><input type="checkbox" id="habitExcludeHoliday"> 공휴일 제외</label>
+        </div>
+      </div>
     </div>
-    <div class="habit-weekday-tools">
-      <button type="button" class="secondary" id="habitEveryDay">매일 선택</button>
-      <button type="button" class="secondary" id="habitClearDays">선택 해제</button>
-    </div>
-    <div class="habit-picker-preview" id="habitDaysPreview">요일을 선택해주세요.</div>
+    <div class="habit-picker-preview" id="habitDaysPreview">반복 조건을 선택해주세요.</div>
 
     <label>시간</label>
     <input type="hidden" id="habitTime" />
@@ -2394,6 +2782,7 @@
     <label>최소 행동</label><input id="habitMinimum" placeholder="예: 10분 걷기" />
     <label>회복 행동</label><input id="habitRecovery" placeholder="예: 스트레칭 3분과 충분한 휴식" />
     <button class="primary wide" id="saveHabit">저장</button>
+    <div class="save-state-line" id="habitSaveStatus" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -2404,6 +2793,7 @@
     <label>첫 문장</label><input id="identityTitleInput" />
     <label>정체성 설명</label><textarea id="identityBodyInput"></textarea>
     <button class="primary wide" id="saveIdentity">저장</button>
+    <div class="save-state-line" id="identitySaveStatus" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -2449,6 +2839,112 @@
       <button class="secondary wide" type="button" data-close="principleDeleteModal">취소</button>
       <button class="danger wide" type="button" id="confirmPrincipleDelete">삭제</button>
     </div>
+  </div>
+</div>
+
+
+<div class="modal" id="stopHabitModal">
+  <div class="sheet habit-editor-sheet stop-habit-editor-sheet">
+    <button class="close" data-close="stopHabitModal">×</button>
+    <h2 id="stopHabitModalTitle">멈출 행동 추가</h2>
+    <input type="hidden" id="stopHabitId" />
+
+    <label>멈출 행동 이름</label>
+    <input id="stopHabitName" placeholder="예: 감정적으로 바로 답하기" />
+
+    <label>연결된 정체성</label>
+    <select id="stopHabitIdentity"></select>
+
+    <div class="repeat-settings unified-repeat-settings">
+      <label for="stopRepeatType">반복</label>
+      <select id="stopRepeatType">
+        <option value="none">반복 안 함</option>
+        <option value="daily">매일</option>
+        <option value="weekly">매주</option>
+        <option value="monthly">매월</option>
+      </select>
+
+      <div id="stopRepeatOptions">
+        <div class="repeat-date-range">
+          <div>
+            <label for="stopRepeatStart">반복 시작일</label>
+            <input type="date" id="stopRepeatStart">
+          </div>
+          <div>
+            <label for="stopRepeatUntil">반복 종료일</label>
+            <input type="date" id="stopRepeatUntil">
+          </div>
+        </div>
+
+        <div class="repeat-grid">
+          <div>
+            <label for="stopRepeatInterval">반복 간격</label>
+            <div class="repeat-interval-row">
+              <span>매</span>
+              <input type="number" id="stopRepeatInterval" min="1" max="12" value="1">
+              <span id="stopRepeatUnit">일</span>
+            </div>
+          </div>
+        </div>
+
+        <div id="stopWeekdayOptions" style="display:none">
+          <label>매주 반복할 요일</label>
+          <div class="stop-weekday-picker"><button type="button" value="0" data-stop-weekday aria-pressed="false">일</button><button type="button" value="1" data-stop-weekday aria-pressed="false">월</button><button type="button" value="2" data-stop-weekday aria-pressed="false">화</button><button type="button" value="3" data-stop-weekday aria-pressed="false">수</button><button type="button" value="4" data-stop-weekday aria-pressed="false">목</button><button type="button" value="5" data-stop-weekday aria-pressed="false">금</button><button type="button" value="6" data-stop-weekday aria-pressed="false">토</button></div>
+        </div>
+
+        <div id="stopMonthlyOptions" style="display:none">
+          <label for="stopMonthlyMode">매월 반복 방식</label>
+          <select id="stopMonthlyMode">
+            <option value="day">날짜 지정</option>
+            <option value="nthWeekday">몇 번째 요일 지정</option>
+          </select>
+
+          <div id="stopMonthlyDayPanel" class="monthly-rule-panel monthly-day-rule-panel">
+            <input type="hidden" id="stopMonthDay" value="1" />
+            <div class="monthly-day-multiselect" id="stopMonthDayPicker" aria-label="멈출 행동 매월 반복 날짜 여러 개 선택">
+              <button type="button" value="1" data-month-day-scope="stop" aria-pressed="false">1</button><button type="button" value="2" data-month-day-scope="stop" aria-pressed="false">2</button><button type="button" value="3" data-month-day-scope="stop" aria-pressed="false">3</button><button type="button" value="4" data-month-day-scope="stop" aria-pressed="false">4</button><button type="button" value="5" data-month-day-scope="stop" aria-pressed="false">5</button><button type="button" value="6" data-month-day-scope="stop" aria-pressed="false">6</button><button type="button" value="7" data-month-day-scope="stop" aria-pressed="false">7</button><button type="button" value="8" data-month-day-scope="stop" aria-pressed="false">8</button><button type="button" value="9" data-month-day-scope="stop" aria-pressed="false">9</button><button type="button" value="10" data-month-day-scope="stop" aria-pressed="false">10</button><button type="button" value="11" data-month-day-scope="stop" aria-pressed="false">11</button><button type="button" value="12" data-month-day-scope="stop" aria-pressed="false">12</button><button type="button" value="13" data-month-day-scope="stop" aria-pressed="false">13</button><button type="button" value="14" data-month-day-scope="stop" aria-pressed="false">14</button><button type="button" value="15" data-month-day-scope="stop" aria-pressed="false">15</button><button type="button" value="16" data-month-day-scope="stop" aria-pressed="false">16</button><button type="button" value="17" data-month-day-scope="stop" aria-pressed="false">17</button><button type="button" value="18" data-month-day-scope="stop" aria-pressed="false">18</button><button type="button" value="19" data-month-day-scope="stop" aria-pressed="false">19</button><button type="button" value="20" data-month-day-scope="stop" aria-pressed="false">20</button><button type="button" value="21" data-month-day-scope="stop" aria-pressed="false">21</button><button type="button" value="22" data-month-day-scope="stop" aria-pressed="false">22</button><button type="button" value="23" data-month-day-scope="stop" aria-pressed="false">23</button><button type="button" value="24" data-month-day-scope="stop" aria-pressed="false">24</button><button type="button" value="25" data-month-day-scope="stop" aria-pressed="false">25</button><button type="button" value="26" data-month-day-scope="stop" aria-pressed="false">26</button><button type="button" value="27" data-month-day-scope="stop" aria-pressed="false">27</button><button type="button" value="28" data-month-day-scope="stop" aria-pressed="false">28</button><button type="button" value="29" data-month-day-scope="stop" aria-pressed="false">29</button><button type="button" value="30" data-month-day-scope="stop" aria-pressed="false">30</button><button type="button" value="31" data-month-day-scope="stop" aria-pressed="false">31</button>
+            </div>
+          </div>
+
+          <div id="stopMonthlyWeekdayPanel" class="monthly-rule-panel monthly-rule-panel-multi" style="display:none">
+            <span>매월</span>
+            <select id="stopMonthWeek" aria-label="멈출 행동 매월 몇 번째 주">
+              <option value="1">첫 번째</option>
+              <option value="2">두 번째</option>
+              <option value="3">세 번째</option>
+              <option value="4">네 번째</option>
+              <option value="5">다섯 번째</option>
+              <option value="last">마지막</option>
+            </select>
+            <input type="hidden" id="stopMonthWeekday" value="0" />
+            <div class="monthly-weekday-multiselect" id="stopMonthWeekdayPicker" aria-label="멈출 행동 매월 반복 여러 요일 선택">
+              <button type="button" value="0" data-month-weekday-scope="stop" aria-pressed="false">일</button><button type="button" value="1" data-month-weekday-scope="stop" aria-pressed="false">월</button><button type="button" value="2" data-month-weekday-scope="stop" aria-pressed="false">화</button><button type="button" value="3" data-month-weekday-scope="stop" aria-pressed="false">수</button><button type="button" value="4" data-month-weekday-scope="stop" aria-pressed="false">목</button><button type="button" value="5" data-month-weekday-scope="stop" aria-pressed="false">금</button><button type="button" value="6" data-month-weekday-scope="stop" aria-pressed="false">토</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="repeat-exclusions">
+          <label><input type="checkbox" id="stopExcludeSunday"> 일요일 제외</label>
+          <label><input type="checkbox" id="stopExcludeHoliday"> 공휴일 제외</label>
+        </div>
+      </div>
+    </div>
+    <div class="habit-picker-preview" id="stopRepeatPreview">반복 조건을 선택해주세요.</div>
+
+    <label>유발 상황·신호</label>
+    <textarea id="stopHabitTrigger" placeholder="예: 화가 나거나 억울하다고 느낄 때"></textarea>
+
+    <label>멈출 행동</label>
+    <textarea id="stopHabitAction" placeholder="예: 확인하지 않고 감정적으로 바로 답하지 않는다."></textarea>
+
+    <label>대신 할 행동</label>
+    <textarea id="stopHabitReplacement" placeholder="예: 10초 멈추고 사실과 해석을 구분한 뒤 답한다."></textarea>
+
+    <label>반성·복귀 기준</label>
+    <textarea id="stopHabitReflection" placeholder="예: 놓쳤다면 자책하지 않고 사과하거나 다시 차분히 말한다."></textarea>
+
+    <button class="primary wide" type="button" id="saveStopHabit">멈출 행동 저장</button>
+    <div class="save-state-line" id="stopHabitSaveStatus" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -2554,13 +3050,35 @@
         </div>
 
         <div id="scheduleMonthlyDateOptions" style="display:none">
-          <label for="scheduleMonthDay">매월 반복할 날짜</label>
-          <div class="monthly-date-row">
-            <span>매월</span>
-            <select id="scheduleMonthDay" aria-label="매월 반복 날짜"></select>
-            <span>일</span>
+          <label for="scheduleMonthlyMode">매월 반복 방식</label>
+          <select id="scheduleMonthlyMode">
+            <option value="day">날짜 지정</option>
+            <option value="nthWeekday">몇 번째 요일 지정</option>
+          </select>
+
+          <div id="scheduleMonthlyDayPanel" class="monthly-rule-panel monthly-day-rule-panel">
+            <input type="hidden" id="scheduleMonthDay" value="1" />
+            <div class="monthly-day-multiselect" id="scheduleMonthDayPicker" aria-label="일정 매월 반복 날짜 여러 개 선택">
+              <button type="button" value="1" data-month-day-scope="schedule" aria-pressed="false">1</button><button type="button" value="2" data-month-day-scope="schedule" aria-pressed="false">2</button><button type="button" value="3" data-month-day-scope="schedule" aria-pressed="false">3</button><button type="button" value="4" data-month-day-scope="schedule" aria-pressed="false">4</button><button type="button" value="5" data-month-day-scope="schedule" aria-pressed="false">5</button><button type="button" value="6" data-month-day-scope="schedule" aria-pressed="false">6</button><button type="button" value="7" data-month-day-scope="schedule" aria-pressed="false">7</button><button type="button" value="8" data-month-day-scope="schedule" aria-pressed="false">8</button><button type="button" value="9" data-month-day-scope="schedule" aria-pressed="false">9</button><button type="button" value="10" data-month-day-scope="schedule" aria-pressed="false">10</button><button type="button" value="11" data-month-day-scope="schedule" aria-pressed="false">11</button><button type="button" value="12" data-month-day-scope="schedule" aria-pressed="false">12</button><button type="button" value="13" data-month-day-scope="schedule" aria-pressed="false">13</button><button type="button" value="14" data-month-day-scope="schedule" aria-pressed="false">14</button><button type="button" value="15" data-month-day-scope="schedule" aria-pressed="false">15</button><button type="button" value="16" data-month-day-scope="schedule" aria-pressed="false">16</button><button type="button" value="17" data-month-day-scope="schedule" aria-pressed="false">17</button><button type="button" value="18" data-month-day-scope="schedule" aria-pressed="false">18</button><button type="button" value="19" data-month-day-scope="schedule" aria-pressed="false">19</button><button type="button" value="20" data-month-day-scope="schedule" aria-pressed="false">20</button><button type="button" value="21" data-month-day-scope="schedule" aria-pressed="false">21</button><button type="button" value="22" data-month-day-scope="schedule" aria-pressed="false">22</button><button type="button" value="23" data-month-day-scope="schedule" aria-pressed="false">23</button><button type="button" value="24" data-month-day-scope="schedule" aria-pressed="false">24</button><button type="button" value="25" data-month-day-scope="schedule" aria-pressed="false">25</button><button type="button" value="26" data-month-day-scope="schedule" aria-pressed="false">26</button><button type="button" value="27" data-month-day-scope="schedule" aria-pressed="false">27</button><button type="button" value="28" data-month-day-scope="schedule" aria-pressed="false">28</button><button type="button" value="29" data-month-day-scope="schedule" aria-pressed="false">29</button><button type="button" value="30" data-month-day-scope="schedule" aria-pressed="false">30</button><button type="button" value="31" data-month-day-scope="schedule" aria-pressed="false">31</button>
+            </div>
           </div>
-          <p class="tiny">선택한 날짜가 없는 달은 그 달의 마지막 날에 표시됩니다.</p>
+
+          <div id="scheduleMonthlyWeekdayPanel" class="monthly-rule-panel" style="display:none">
+            <span>매월</span>
+            <select id="scheduleMonthWeek" aria-label="매월 몇 번째 주">
+              <option value="1">첫 번째</option>
+              <option value="2">두 번째</option>
+              <option value="3">세 번째</option>
+              <option value="4">네 번째</option>
+              <option value="5">다섯 번째</option>
+              <option value="last">마지막</option>
+            </select>
+            <input type="hidden" id="scheduleMonthWeekday" value="0" />
+            <div class="monthly-weekday-multiselect" id="scheduleMonthWeekdayPicker" aria-label="일정 매월 반복 여러 요일 선택">
+              <button type="button" value="0" data-month-weekday-scope="schedule" aria-pressed="false">일</button><button type="button" value="1" data-month-weekday-scope="schedule" aria-pressed="false">월</button><button type="button" value="2" data-month-weekday-scope="schedule" aria-pressed="false">화</button><button type="button" value="3" data-month-weekday-scope="schedule" aria-pressed="false">수</button><button type="button" value="4" data-month-weekday-scope="schedule" aria-pressed="false">목</button><button type="button" value="5" data-month-weekday-scope="schedule" aria-pressed="false">금</button><button type="button" value="6" data-month-weekday-scope="schedule" aria-pressed="false">토</button>
+            </div>
+          </div>
+          <p class="tiny">예: 매월 1·15·28일처럼 여러 날짜 또는 매월 세 번째 월·수·금요일처럼 여러 요일 선택</p>
         </div>
 
         <div class="repeat-exclusions">
@@ -2572,6 +3090,7 @@
     </div>
 
     <button class="primary wide" id="saveSchedule">일정 저장</button>
+    <div class="save-state-line" id="scheduleSaveStatus" role="status" aria-live="polite"></div>
   </div>
 </div>
 
@@ -2604,6 +3123,7 @@
     <button class="secondary wide" id="exportData">데이터 내보내기</button>
     <label>데이터 가져오기</label>
     <input type="file" id="importData" accept="application/json" />
+    <div class="save-state-line" id="settingsSaveStatus" role="status" aria-live="polite"></div>
     <div class="spacer"></div>
     <button class="danger wide" id="resetData">초기화</button>
   </div>
@@ -2613,7 +3133,9 @@
 
 <script>
 const STORAGE_KEY = "sucheojakju_v1";
-const PRINCIPLE_DROPDOWN_SCHEMA_VERSION = 449;
+const PRINCIPLE_DROPDOWN_SCHEMA_VERSION = 451;
+const APP_FEATURE_SCHEMA_VERSION = 454;
+const PREVIEW_PRINCIPLE_LIBRARY_LABEL = "5개 그룹 · 총 27개 원칙";
 
 const defaultData = {
   identity: {
@@ -2657,6 +3179,7 @@ const defaultData = {
     {id:"h3", name:"미래준비", identity:"회사원", days:"월·수·금", time:"저녁 8시~9시", cue:"책상에 앉아 학습 파일 열기", normal:"AI·직무 공부 30분과 결과물 한 줄", minimum:"5분 공부 또는 질문 한 줄", recovery:"다음에 공부할 내용 한 줄 적기"},
     {id:"h4", name:"인간관계", identity:"관계 속 주인", days:"매일", time:"저녁 7시~8시", cue:"가족·동료를 마주하거나 연락할 때", normal:"고마움이나 존중을 표현하고 10분 대화", minimum:"안부 또는 고마움 한마디", recovery:"감정적 반응을 멈추고 차분히 다시 대화하기"}
   ],
+  stopHabits: [],
   today: {},
   records: [],
   shakeRecords: [],
@@ -2664,18 +3187,20 @@ const defaultData = {
   principleGroups: [
     {
       name:"1. 관점과 주도권",
-      summary:"상황과 타인의 반응에 끌려가지 않고, 내 관점과 마음의 주도권을 선택한다.",
+      summary:"상황과 타인의 반응에 끌려가지 않고, 내 관점과 마음과 삶의 주도권을 선택한다.",
       options:[
-        "그사람이 왜 그랬는지 생각해 보기",
         "행복과 불행은 상황보다 내가 어떻게 바라보고 선택하느냐에 달려 있다.",
         "상처받을 수는 있어도 타인에게 내 마음과 하루의 주도권을 넘기지 않는다.",
-        "내가 이르는 곳마다 주인의 삶을 산다."
+        "내가 이르는 곳마다 주인의 삶을 산다.",
+        "타인에게 내 마음과 하루의 주도권을 넘기지 않는다.(내 때문에, 당신 때문에 X)",
+        "내가 이르는 곳마다 주인으로 삶을 산다.(내 인생의 주인으로 산다. 지금! 여기서!)"
       ]
     },
     {
       name:"2. 자기보호와 관계의 경계",
-      summary:"나를 벌주지 않고 돌보며, 타인도 존중하되 서로의 삶을 통제하거나 대신 살아주지 않는다.",
+      summary:"나를 심판하거나 벌주지 않고 돌보며, 타인도 자기 삶의 주인임을 존중하고 필요한 경계를 지킨다.",
       options:[
+        "그사람이 왜 그랬는지 생각해 보기",
         "나는 나를 심판하거나 벌주지 않고, 내 몸과 마음을 살피며 더 나은 방향으로 이끈다.",
         "나와 타인은 각자 자기 삶의 주인이다. 서로 존중하되 통제하거나 대신 살아주지 않는다.",
         "내 몸과 마음을 망가뜨릴 만큼 중요한 일은 없다. 필요하면 멈추거나 내려놓는다."
@@ -2683,51 +3208,69 @@ const defaultData = {
     },
     {
       name:"3. 선택과 책임",
-      summary:"중요도와 장기적 이익을 기준으로 선택하고, 내가 선택한 몫만 책임진다.",
+      summary:"가치와 중요도, 장기적인 이익을 기준으로 선택하고 내가 선택한 몫을 책임진다.",
       options:[
         "모든 일을 다 할 수는 없다. 가치와 중요도에 따라 선택하고 그 결과를 책임진다.",
         "내가 선택한 몫은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
-        "장기적으로 이익이면 하기 싫어도 하고, 손해라면 하고 싶어도 멈춘다."
+        "장기적으로 이익이면 하기 싫어도 하고, 손해라면 하고 싶어도 멈춘다.",
+        "모든 것을 내 탓으로 돌리지 않는다. 내가 선택한 부분은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
+        "과정은 내가 만들고 뜻은 하늘이 이룬다. 최선을 다하고 결과를 받아들인다."
       ]
     },
     {
       name:"4. 현실 실행과 과정 개선",
-      summary:"현실을 피하거나 탓하지 않고 가능한 행동을 시작하며, 실패하면 과정을 고쳐 다시 시도한다.",
+      summary:"현실을 피하거나 탓하지 않고 지금 가능한 행동을 시작하며, 결과를 통해 과정을 고쳐 다시 시도한다.",
       options:[
         "피한다고 해결되는건 없다. 당장 불편해도 미루지 말고 지금 끝내야 가벼워진다.",
         "현실을 피하거나 탓하지 않고, 사실과 주어진 조건을 보며 지금 할 수 있는 첫 행동을 한다.",
         "천 리 길도 한 걸음부터다. 작은 행동을 반복하면 안 되던 것도 된다.",
-        "과정은 내가 만들고 결과는 받아들인다. 실패하면 시스템을 고쳐 다시 시작한다."
+        "과정은 내가 만들고 결과는 받아들인다. 실패하면 시스템을 고쳐 다시 시작한다.",
+        "상황을 탓해봤자 달라지는건 없다. 그 상황에서 내가 할수 있는 최선을 다하는 것이다.",
+        "농부는 비가 오면 모종을 심고, 해가 뜨면 농약을 치듯이 날씨를 탓하지 않고 날씨에 맞춰 내가 할 수 있는 최선을 다한다.",
+        "피한다고 해결되는 것은 없다. 불편하더라도 사실을 바라보고 지금 내가 할 수 있는 첫 행동을 시작한다."
       ]
     },
     {
       name:"5. 회복과 삶의 방향",
-      summary:"잘못과 흔들림에서 복귀하고, 원하는 삶의 방향에 맞춰 현재를 당당하게 살아간다.",
+      summary:"잘못과 흔들림에서 다시 복귀하고, 타인의 평가보다 내가 원하는 삶의 방향에 맞춰 현재를 당당하게 살아간다.",
       options:[
         "잘못은 인정하고 바로잡되 나를 비난하지 않고, 흔들리면 다시 주인의 자리로 돌아온다.",
         "타인의 평가와 실패를 지나치게 두려워하지 않는다. 원하는 삶의 방향에 맞다면 당당히 행동한다.",
-        "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다."
+        "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다.",
+        "나는 항상 흔들리지 않는 사람이 아니라, 흔들렸음을 알아차리고 다시 내 삶의 주인 자리로 돌아오는 사람이다.",
+        "남에게 욕먹는 것을 지나치게 두려워하지 않는다. 욕 한 번 먹고 말지, 안 되면 다른 길을 선택하면 된다는 마음으로 당당히 행동한다.",
+        "죽을 때 내가 원했던 삶을 살았다고 말할 수 있는가? 그렇다면 지금 하려는 일을 당당히 진행한다."
       ]
     }
   ],
   choiceOptions: [
-    "그사람이 왜 그랬는지 생각해 보기",
     "행복과 불행은 상황보다 내가 어떻게 바라보고 선택하느냐에 달려 있다.",
     "상처받을 수는 있어도 타인에게 내 마음과 하루의 주도권을 넘기지 않는다.",
     "내가 이르는 곳마다 주인의 삶을 산다.",
+    "타인에게 내 마음과 하루의 주도권을 넘기지 않는다.(내 때문에, 당신 때문에 X)",
+    "내가 이르는 곳마다 주인으로 삶을 산다.(내 인생의 주인으로 산다. 지금! 여기서!)",
+    "그사람이 왜 그랬는지 생각해 보기",
     "나는 나를 심판하거나 벌주지 않고, 내 몸과 마음을 살피며 더 나은 방향으로 이끈다.",
     "나와 타인은 각자 자기 삶의 주인이다. 서로 존중하되 통제하거나 대신 살아주지 않는다.",
     "내 몸과 마음을 망가뜨릴 만큼 중요한 일은 없다. 필요하면 멈추거나 내려놓는다.",
     "모든 일을 다 할 수는 없다. 가치와 중요도에 따라 선택하고 그 결과를 책임진다.",
     "내가 선택한 몫은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
     "장기적으로 이익이면 하기 싫어도 하고, 손해라면 하고 싶어도 멈춘다.",
+    "모든 것을 내 탓으로 돌리지 않는다. 내가 선택한 부분은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
+    "과정은 내가 만들고 뜻은 하늘이 이룬다. 최선을 다하고 결과를 받아들인다.",
     "피한다고 해결되는건 없다. 당장 불편해도 미루지 말고 지금 끝내야 가벼워진다.",
     "현실을 피하거나 탓하지 않고, 사실과 주어진 조건을 보며 지금 할 수 있는 첫 행동을 한다.",
     "천 리 길도 한 걸음부터다. 작은 행동을 반복하면 안 되던 것도 된다.",
     "과정은 내가 만들고 결과는 받아들인다. 실패하면 시스템을 고쳐 다시 시작한다.",
+    "상황을 탓해봤자 달라지는건 없다. 그 상황에서 내가 할수 있는 최선을 다하는 것이다.",
+    "농부는 비가 오면 모종을 심고, 해가 뜨면 농약을 치듯이 날씨를 탓하지 않고 날씨에 맞춰 내가 할 수 있는 최선을 다한다.",
+    "피한다고 해결되는 것은 없다. 불편하더라도 사실을 바라보고 지금 내가 할 수 있는 첫 행동을 시작한다.",
     "잘못은 인정하고 바로잡되 나를 비난하지 않고, 흔들리면 다시 주인의 자리로 돌아온다.",
     "타인의 평가와 실패를 지나치게 두려워하지 않는다. 원하는 삶의 방향에 맞다면 당당히 행동한다.",
-    "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다."
+    "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다.",
+    "나는 항상 흔들리지 않는 사람이 아니라, 흔들렸음을 알아차리고 다시 내 삶의 주인 자리로 돌아오는 사람이다.",
+    "남에게 욕먹는 것을 지나치게 두려워하지 않는다. 욕 한 번 먹고 말지, 안 되면 다른 길을 선택하면 된다는 마음으로 당당히 행동한다.",
+    "죽을 때 내가 원했던 삶을 살았다고 말할 수 있는가? 그렇다면 지금 하려는 일을 당당히 진행한다."
   ],
   reflectionOptions: [],
   tomorrowOptions: [
@@ -2741,23 +3284,33 @@ const defaultData = {
     "술을 한 잔 덜 마시거나 오늘은 쉬어간다."
   ],
   principleDetails: {
-    "그사람이 왜 그랬는지 생각해 보기":"그사람이 왜 그랬는지 생각해 보기",
     "행복과 불행은 상황보다 내가 어떻게 바라보고 선택하느냐에 달려 있다.":"행복과 불행은 상황보다 내가 어떻게 바라보고 선택하느냐에 달려 있다.",
     "상처받을 수는 있어도 타인에게 내 마음과 하루의 주도권을 넘기지 않는다.":"상처받을 수는 있어도 타인에게 내 마음과 하루의 주도권을 넘기지 않는다.",
     "내가 이르는 곳마다 주인의 삶을 산다.":"내가 이르는 곳마다 주인의 삶을 산다.",
+    "타인에게 내 마음과 하루의 주도권을 넘기지 않는다.(내 때문에, 당신 때문에 X)":"타인에게 내 마음과 하루의 주도권을 넘기지 않는다.(내 때문에, 당신 때문에 X)",
+    "내가 이르는 곳마다 주인으로 삶을 산다.(내 인생의 주인으로 산다. 지금! 여기서!)":"내가 이르는 곳마다 주인으로 삶을 산다.(내 인생의 주인으로 산다. 지금! 여기서!)",
+    "그사람이 왜 그랬는지 생각해 보기":"그사람이 왜 그랬는지 생각해 보기",
     "나는 나를 심판하거나 벌주지 않고, 내 몸과 마음을 살피며 더 나은 방향으로 이끈다.":"나는 나를 심판하거나 벌주지 않고, 내 몸과 마음을 살피며 더 나은 방향으로 이끈다.",
     "나와 타인은 각자 자기 삶의 주인이다. 서로 존중하되 통제하거나 대신 살아주지 않는다.":"나와 타인은 각자 자기 삶의 주인이다. 서로 존중하되 통제하거나 대신 살아주지 않는다.",
     "내 몸과 마음을 망가뜨릴 만큼 중요한 일은 없다. 필요하면 멈추거나 내려놓는다.":"내 몸과 마음을 망가뜨릴 만큼 중요한 일은 없다. 필요하면 멈추거나 내려놓는다.",
     "모든 일을 다 할 수는 없다. 가치와 중요도에 따라 선택하고 그 결과를 책임진다.":"모든 일을 다 할 수는 없다. 가치와 중요도에 따라 선택하고 그 결과를 책임진다.",
     "내가 선택한 몫은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.":"내가 선택한 몫은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
     "장기적으로 이익이면 하기 싫어도 하고, 손해라면 하고 싶어도 멈춘다.":"장기적으로 이익이면 하기 싫어도 하고, 손해라면 하고 싶어도 멈춘다.",
+    "모든 것을 내 탓으로 돌리지 않는다. 내가 선택한 부분은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.":"모든 것을 내 탓으로 돌리지 않는다. 내가 선택한 부분은 책임지고, 바꿀 수 없는 과거와 타인의 몫은 내려놓는다.",
+    "과정은 내가 만들고 뜻은 하늘이 이룬다. 최선을 다하고 결과를 받아들인다.":"과정은 내가 만들고 뜻은 하늘이 이룬다. 최선을 다하고 결과를 받아들인다.",
     "피한다고 해결되는건 없다. 당장 불편해도 미루지 말고 지금 끝내야 가벼워진다.":"피한다고 해결되는건 없다. 당장 불편해도 미루지 말고 지금 끝내야 가벼워진다.",
     "현실을 피하거나 탓하지 않고, 사실과 주어진 조건을 보며 지금 할 수 있는 첫 행동을 한다.":"현실을 피하거나 탓하지 않고, 사실과 주어진 조건을 보며 지금 할 수 있는 첫 행동을 한다.",
     "천 리 길도 한 걸음부터다. 작은 행동을 반복하면 안 되던 것도 된다.":"천 리 길도 한 걸음부터다. 작은 행동을 반복하면 안 되던 것도 된다.",
     "과정은 내가 만들고 결과는 받아들인다. 실패하면 시스템을 고쳐 다시 시작한다.":"과정은 내가 만들고 결과는 받아들인다. 실패하면 시스템을 고쳐 다시 시작한다.",
+    "상황을 탓해봤자 달라지는건 없다. 그 상황에서 내가 할수 있는 최선을 다하는 것이다.":"상황을 탓해봤자 달라지는건 없다. 그 상황에서 내가 할수 있는 최선을 다하는 것이다.",
+    "농부는 비가 오면 모종을 심고, 해가 뜨면 농약을 치듯이 날씨를 탓하지 않고 날씨에 맞춰 내가 할 수 있는 최선을 다한다.":"농부는 비가 오면 모종을 심고, 해가 뜨면 농약을 치듯이 날씨를 탓하지 않고 날씨에 맞춰 내가 할 수 있는 최선을 다한다.",
+    "피한다고 해결되는 것은 없다. 불편하더라도 사실을 바라보고 지금 내가 할 수 있는 첫 행동을 시작한다.":"피한다고 해결되는 것은 없다. 불편하더라도 사실을 바라보고 지금 내가 할 수 있는 첫 행동을 시작한다.",
     "잘못은 인정하고 바로잡되 나를 비난하지 않고, 흔들리면 다시 주인의 자리로 돌아온다.":"잘못은 인정하고 바로잡되 나를 비난하지 않고, 흔들리면 다시 주인의 자리로 돌아온다.",
     "타인의 평가와 실패를 지나치게 두려워하지 않는다. 원하는 삶의 방향에 맞다면 당당히 행동한다.":"타인의 평가와 실패를 지나치게 두려워하지 않는다. 원하는 삶의 방향에 맞다면 당당히 행동한다.",
-    "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다.":"지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다."
+    "지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다.":"지나간 과거의 후회와 오지 않은 미래의 걱정을 내려놓고 현재에 집중한다.",
+    "나는 항상 흔들리지 않는 사람이 아니라, 흔들렸음을 알아차리고 다시 내 삶의 주인 자리로 돌아오는 사람이다.":"나는 항상 흔들리지 않는 사람이 아니라, 흔들렸음을 알아차리고 다시 내 삶의 주인 자리로 돌아오는 사람이다.",
+    "남에게 욕먹는 것을 지나치게 두려워하지 않는다. 욕 한 번 먹고 말지, 안 되면 다른 길을 선택하면 된다는 마음으로 당당히 행동한다.":"남에게 욕먹는 것을 지나치게 두려워하지 않는다. 욕 한 번 먹고 말지, 안 되면 다른 길을 선택하면 된다는 마음으로 당당히 행동한다.",
+    "죽을 때 내가 원했던 삶을 살았다고 말할 수 있는가? 그렇다면 지금 하려는 일을 당당히 진행한다.":"죽을 때 내가 원했던 삶을 살았다고 말할 수 있는가? 그렇다면 지금 하려는 일을 당당히 진행한다."
   }
 };
 
@@ -2968,6 +3521,33 @@ function normalizeData(input){
     return aOrder-bOrder;
   }).map(({_originalIndex,...habit})=>habit);
   merged.humanRelationshipHabitAdded=true;
+  merged.stopHabits=(Array.isArray(source.stopHabits)?source.stopHabits:[])
+    .map((item,index)=>{
+      const startDate=String(
+        item?.repeat?.startDate||
+        item?.startDate||
+        todayKey()
+      );
+      return {
+        id:String(item?.id||`stop_${index}_${Date.now()}`),
+        name:String(item?.name||"").trim(),
+        identity:String(item?.identity||"지금의 나").trim(),
+        trigger:String(item?.trigger||"").trim(),
+        stopAction:String(item?.stopAction||item?.action||"").trim(),
+        replacement:String(item?.replacement||"").trim(),
+        reflection:String(item?.reflection||"").trim(),
+        repeat:normalizeRepeatRule(
+          item?.repeat||{
+            type:"daily",
+            interval:1,
+            startDate,
+            until:addMonthsToKey(startDate,12)
+          },
+          startDate
+        )
+      };
+    })
+    .filter(item=>item.name);
   merged.today=source.today||{};
   merged.records=Array.isArray(source.records)?source.records:[];
   merged.shakeRecords=Array.isArray(source.shakeRecords)?source.shakeRecords:[];
@@ -2995,11 +3575,20 @@ function normalizeData(input){
         type:["daily","weekly","monthly"].includes(item.repeat.type)?item.repeat.type:"none",
         interval:Math.max(1,Number(item.repeat.interval)||1),
         weekdays:Array.isArray(item.repeat.weekdays)?item.repeat.weekdays.map(Number):[],
+        monthlyMode:item.repeat.monthlyMode==="nthWeekday"?"nthWeekday":"day",
         monthDay:Math.max(1,Math.min(31,Number(item.repeat.monthDay)||dateFromKey(item?.seriesStart||item?.date||todayKey()).getDate())),
+        monthWeek:["1","2","3","4","5","last"].includes(String(item.repeat.monthWeek))?String(item.repeat.monthWeek):"1",
+        monthWeekdays:[...new Set(
+          (Array.isArray(item.repeat.monthWeekdays)&&item.repeat.monthWeekdays.length
+            ?item.repeat.monthWeekdays:[item.repeat.monthWeekday])
+            .map(Number).filter(day=>day>=0&&day<=6)
+        )],
+        monthWeekday:Math.max(0,Math.min(6,Number(item.repeat.monthWeekday)||0)),
+        startDate:String(item.repeat.startDate||item?.seriesStart||item?.date||""),
         until:String(item.repeat.until||item?.date||""),
         excludeSunday:Boolean(item.repeat.excludeSunday),
         excludeHoliday:Boolean(item.repeat.excludeHoliday)
-      }:{type:"none",interval:1,weekdays:[],monthDay:dateFromKey(item?.date||todayKey()).getDate(),until:String(item?.date||""),excludeSunday:false,excludeHoliday:false}
+      }:{type:"none",interval:1,weekdays:[],monthlyMode:"day",monthDay:dateFromKey(item?.date||todayKey()).getDate(),monthWeek:"1",monthWeekdays:[dateFromKey(item?.date||todayKey()).getDay()],monthWeekday:dateFromKey(item?.date||todayKey()).getDay(),startDate:String(item?.date||""),until:String(item?.date||""),excludeSunday:false,excludeHoliday:false}
     };
   });
   merged.calendarNotes=(source.calendarNotes&&typeof source.calendarNotes==="object")?source.calendarNotes:{};
@@ -3116,80 +3705,25 @@ function normalizeData(input){
     Number(source.principleDropdownSchemaVersion)||0;
 
   if(savedPrincipleSchemaVersion<PRINCIPLE_DROPDOWN_SCHEMA_VERSION){
-    const clean=value=>String(value||"").trim();
+    /*
+      v4.5.1 원칙 라이브러리 복구:
+      기존 GitHub 주소의 localStorage에 남아 있는 구버전 원칙 목록만
+      미리보기 기준 5개 그룹·27개 원칙으로 한 번 교체합니다.
+      날짜별 기록·습관·일정·메모 등 다른 데이터는 유지합니다.
+    */
+    merged.principleGroups=structuredClone(defaultData.principleGroups);
+    merged.choiceOptions=structuredClone(defaultData.choiceOptions);
+    merged.reflectionOptions=structuredClone(defaultData.choiceOptions);
+    merged.principleDetails={};
 
-    const existingOptions=(merged.choiceOptions||[])
-      .map(clean)
-      .filter(Boolean);
-
-    const requiredOptions=(defaultData.choiceOptions||[])
-      .map(clean)
-      .filter(Boolean);
-
-    merged.choiceOptions=[
-      ...requiredOptions,
-      ...existingOptions.filter(option=>!requiredOptions.includes(option))
-    ];
-    merged.reflectionOptions=[...merged.choiceOptions];
-
-    const existingGroups=Array.isArray(merged.principleGroups)
-      ?merged.principleGroups:[];
-    const existingByName=new Map(
-      existingGroups.map(group=>[
-        clean(group?.name),
-        {
-          name:clean(group?.name),
-          summary:clean(group?.summary),
-          options:(Array.isArray(group?.options)?group.options:[])
-            .map(clean)
-            .filter(Boolean)
-        }
-      ])
-    );
-
-    const mergedGroups=structuredClone(defaultData.principleGroups).map(defaultGroup=>{
-      const savedGroup=existingByName.get(clean(defaultGroup.name));
-      const defaultOptions=(defaultGroup.options||[])
-        .map(clean)
-        .filter(Boolean);
-      const savedOptions=(savedGroup?.options||[])
-        .filter(option=>merged.choiceOptions.includes(option));
-
-      existingByName.delete(clean(defaultGroup.name));
-
-      return {
-        name:clean(defaultGroup.name),
-        summary:clean(savedGroup?.summary)||clean(defaultGroup.summary),
-        options:[
-          ...defaultOptions,
-          ...savedOptions.filter(option=>!defaultOptions.includes(option))
-        ]
-      };
-    });
-
-    existingByName.forEach(group=>{
-      const options=(group.options||[])
-        .filter(option=>merged.choiceOptions.includes(option));
-      if(options.length){
-        mergedGroups.push({
-          name:group.name||`추가 원칙 그룹 ${mergedGroups.length+1}`,
-          summary:group.summary||"직접 관리한 원칙입니다.",
-          options:[...new Set(options)]
-        });
-      }
-    });
-
-    merged.principleGroups=mergedGroups;
-    merged.principleDetails={
-      ...(merged.principleDetails||{})
-    };
-
-    merged.choiceOptions.forEach(option=>{
-      merged.principleDetails[option]=
-        clean(merged.principleDetails[option])||option;
+    defaultData.choiceOptions.forEach(option=>{
+      merged.principleDetails[option]=option;
     });
 
     merged.principleLibraryCustomized=true;
+    merged.principleLibraryRevision=
+      Math.max(1,Number(source.principleLibraryRevision)||0)+1;
+    merged.tomorrowActionLibraryRevision=0;
   }
 
   merged.principleDropdownSchemaVersion=
@@ -3334,6 +3868,8 @@ function blankDay(){
     choiceReasons:[],
     habitChecks:{},
     habitTimes:{},
+    stopHabitChecks:{},
+    stopHabitNotes:{},
     evidence:"",
     evidences:[],
     evidenceReasons:[],
@@ -3346,6 +3882,8 @@ function ensureDay(key){
   const day=data.today[key];
   day.habitChecks=(day.habitChecks&&typeof day.habitChecks==="object")?day.habitChecks:{};
   day.habitTimes=(day.habitTimes&&typeof day.habitTimes==="object")?day.habitTimes:{};
+  day.stopHabitChecks=(day.stopHabitChecks&&typeof day.stopHabitChecks==="object")?day.stopHabitChecks:{};
+  day.stopHabitNotes=(day.stopHabitNotes&&typeof day.stopHabitNotes==="object")?day.stopHabitNotes:{};
   day.memo=day.memo||"";
   day.choices=Array.isArray(day.choices)?day.choices:(day.choice?[day.choice]:[]);
   day.evidences=Array.isArray(day.evidences)?day.evidences:(day.evidence?[day.evidence]:[]);
@@ -3599,22 +4137,239 @@ function daysBetweenKeys(start,end){
 function isKoreanHoliday(key){
   return KOREA_HOLIDAY_FIXED.has(key.slice(5))||KOREA_HOLIDAY_DATES.has(key);
 }
-function repeatLabel(repeat){
-  const rule=repeat||{};
-  if(!rule.type||rule.type==="none")return "";
+function normalizeMonthWeek(value){
+  const text=String(value||"1");
+  return ["1","2","3","4","5","last"].includes(text)?text:"1";
+}
+function normalizeRepeatRule(rule,startDate,fallbackWeekdays=[]){
+  const raw=rule&&typeof rule==="object"?rule:{};
+  const start=String(raw.startDate||startDate||todayKey());
+  const type=["daily","weekly","monthly"].includes(raw.type)?raw.type:"none";
+  const interval=Math.max(1,Number(raw.interval)||1);
 
-  const interval=Math.max(1,Number(rule.interval)||1);
+  const weekdays=[...new Set(
+    (Array.isArray(raw.weekdays)&&raw.weekdays.length
+      ?raw.weekdays:fallbackWeekdays)
+      .map(Number)
+      .filter(day=>day>=0&&day<=6)
+  )];
+
+  const legacyMonthDay=Math.max(
+    1,
+    Math.min(31,Number(raw.monthDay)||dateFromKey(start).getDate())
+  );
+  const monthDays=[...new Set(
+    (Array.isArray(raw.monthDays)&&raw.monthDays.length
+      ?raw.monthDays:[legacyMonthDay])
+      .map(Number)
+      .filter(day=>day>=1&&day<=31)
+  )].sort((a,b)=>a-b);
+
+  const legacyMonthWeekday=Math.max(
+    0,
+    Math.min(6,Number(raw.monthWeekday??dateFromKey(start).getDay()))
+  );
+  const monthWeekdays=[...new Set(
+    (Array.isArray(raw.monthWeekdays)&&raw.monthWeekdays.length
+      ?raw.monthWeekdays:[legacyMonthWeekday])
+      .map(Number)
+      .filter(day=>day>=0&&day<=6)
+  )].sort((a,b)=>a-b);
+
+  return {
+    type,
+    interval,
+    weekdays,
+    monthlyMode:raw.monthlyMode==="nthWeekday"?"nthWeekday":"day",
+    monthDays,
+    monthDay:monthDays[0]??legacyMonthDay,
+    monthWeek:normalizeMonthWeek(raw.monthWeek),
+    monthWeekdays,
+    monthWeekday:monthWeekdays[0]??legacyMonthWeekday,
+    startDate:start,
+    until:String(raw.until||addMonthsToKey(start,12)),
+    excludeSunday:Boolean(raw.excludeSunday),
+    excludeHoliday:Boolean(raw.excludeHoliday)
+  };
+}
+
+
+function monthlyDayFieldId(scope){
+  return scope==="habit"
+    ?"habitMonthDay"
+    :scope==="stop"
+      ?"stopMonthDay"
+      :"scheduleMonthDay";
+}
+
+function collectMonthlyDays(scope){
+  return [...document.querySelectorAll(
+    `[data-month-day-scope="${scope}"].selected`
+  )]
+    .map(button=>Number(button.value))
+    .filter(day=>day>=1&&day<=31)
+    .sort((a,b)=>a-b);
+}
+
+function setMonthlyDayPicker(scope,days){
+  const normalized=[...new Set(
+    (Array.isArray(days)?days:[days])
+      .map(Number)
+      .filter(day=>day>=1&&day<=31)
+  )].sort((a,b)=>a-b);
+
+  const selected=normalized.length?normalized:[1];
+
+  document.querySelectorAll(
+    `[data-month-day-scope="${scope}"]`
+  ).forEach(button=>{
+    const active=selected.includes(Number(button.value));
+    button.classList.toggle("selected",active);
+    button.setAttribute("aria-pressed",active?"true":"false");
+  });
+
+  const hidden=document.getElementById(monthlyDayFieldId(scope));
+  if(hidden)hidden.value=String(selected[0]);
+}
+
+function collectMonthlyWeekdays(scope){
+  return [...document.querySelectorAll(`[data-month-weekday-scope="${scope}"].selected`)]
+    .map(button=>Number(button.value))
+    .filter(day=>day>=0&&day<=6)
+    .sort((a,b)=>a-b);
+}
+
+function setMonthlyWeekdayPicker(scope,weekdays){
+  const normalized=[...new Set(
+    (Array.isArray(weekdays)?weekdays:[weekdays])
+      .map(Number)
+      .filter(day=>day>=0&&day<=6)
+  )];
+  const selected=normalized.length?normalized:[0];
+
+  document.querySelectorAll(`[data-month-weekday-scope="${scope}"]`).forEach(button=>{
+    const active=selected.includes(Number(button.value));
+    button.classList.toggle("selected",active);
+    button.setAttribute("aria-pressed",active?"true":"false");
+  });
+
+  const hidden=document.getElementById(`${scope}MonthWeekday`);
+  if(hidden)hidden.value=String(selected[0]);
+}
+
+function nthWeekdayOfMonthKey(year,monthIndex,monthWeek,weekday){
+  const targetWeekday=Math.max(0,Math.min(6,Number(weekday)||0));
+  if(String(monthWeek)==="last"){
+    const last=new Date(year,monthIndex+1,0);
+    const offset=(last.getDay()-targetWeekday+7)%7;
+    last.setDate(last.getDate()-offset);
+    return dateKey(last);
+  }
+
+  const nth=Math.max(1,Math.min(5,Number(monthWeek)||1));
+  const first=new Date(year,monthIndex,1);
+  const offset=(targetWeekday-first.getDay()+7)%7;
+  const day=1+offset+(nth-1)*7;
+  const candidate=new Date(year,monthIndex,day);
+  return candidate.getMonth()===monthIndex?dateKey(candidate):"";
+}
+function repeatRuleMatchesDate(date,rule,startDate){
+  const normalized=normalizeRepeatRule(rule,startDate);
+  const start=normalized.startDate;
+
+  if(date<start||date>normalized.until)return false;
+  if(shouldExcludeRepeatDate(date,normalized))return false;
+
+  if(normalized.type==="none")return date===start;
+
+  if(normalized.type==="daily"){
+    return daysBetweenKeys(start,date)%normalized.interval===0;
+  }
+
+  if(normalized.type==="weekly"){
+    const diff=daysBetweenKeys(start,date);
+    const weekIndex=Math.floor(diff/7);
+    const weekdays=normalized.weekdays.length
+      ?normalized.weekdays:[dateFromKey(start).getDay()];
+
+    return weekIndex%normalized.interval===0
+      &&weekdays.includes(dateFromKey(date).getDay());
+  }
+
+  if(normalized.type==="monthly"){
+    const startObject=dateFromKey(start);
+    const dateObject=dateFromKey(date);
+    const monthDiff=(dateObject.getFullYear()-startObject.getFullYear())*12
+      +(dateObject.getMonth()-startObject.getMonth());
+
+    if(monthDiff<0||monthDiff%normalized.interval!==0)return false;
+
+    if(normalized.monthlyMode==="nthWeekday"){
+      return normalized.monthWeekdays.some(weekday=>
+        date===nthWeekdayOfMonthKey(
+          dateObject.getFullYear(),
+          dateObject.getMonth(),
+          normalized.monthWeek,
+          weekday
+        )
+      );
+    }
+
+    const lastDay=new Date(
+      dateObject.getFullYear(),
+      dateObject.getMonth()+1,
+      0
+    ).getDate();
+
+    return normalized.monthDays.some(
+      monthDay=>dateObject.getDate()===Math.min(monthDay,lastDay)
+    );
+  }
+
+  return false;
+}
+function repeatLabel(repeat){
+  const rule=normalizeRepeatRule(
+    repeat,
+    repeat?.startDate||repeat?.seriesStart||todayKey()
+  );
+
+  if(!rule.type||rule.type==="none")return "반복 안 함";
+
   const weekdayNames=["일","월","화","수","목","금","토"];
+  const weekNames={
+    "1":"첫 번째",
+    "2":"두 번째",
+    "3":"세 번째",
+    "4":"네 번째",
+    "5":"다섯 번째",
+    "last":"마지막"
+  };
 
   let base="";
+
   if(rule.type==="daily"){
-    base=interval===1?"매일":`${interval}일마다`;
+    base=rule.interval===1?"매일":`${rule.interval}일마다`;
   }else if(rule.type==="weekly"){
-    const days=(rule.weekdays||[]).map(day=>weekdayNames[Number(day)]).join("·");
-    base=interval===1?"매주":`${interval}주마다`;
+    const days=(rule.weekdays||[])
+      .map(day=>weekdayNames[Number(day)])
+      .join("·");
+
+    base=rule.interval===1?"매주":`${rule.interval}주마다`;
     if(days)base+=` ${days}요일`;
   }else if(rule.type==="monthly"){
-    base=interval===1?`매월 ${rule.monthDay||1}일`:`${interval}개월마다 ${rule.monthDay||1}일`;
+    const intervalLabel=rule.interval===1?"매월":`${rule.interval}개월마다`;
+    const monthWeekdays=(rule.monthWeekdays||[])
+      .map(day=>weekdayNames[Number(day)])
+      .join("·");
+    const monthDays=(rule.monthDays||[])
+      .map(Number)
+      .sort((a,b)=>a-b)
+      .join("·");
+
+    base=rule.monthlyMode==="nthWeekday"
+      ?`${intervalLabel} ${weekNames[rule.monthWeek]} ${monthWeekdays}요일`
+      :`${intervalLabel} ${monthDays}일`;
   }
 
   const exclusions=[
@@ -3635,97 +4390,127 @@ function shouldExcludeRepeatDate(key,rule){
   return false;
 }
 function buildRepeatDates(startDate,rule){
-  const repeat=rule||{type:"none"};
+  const repeat=normalizeRepeatRule(rule,startDate);
   if(!repeat.type||repeat.type==="none")return [startDate];
 
   const until=repeat.until&&repeat.until>=startDate
     ?repeat.until
     :addMonthsToKey(startDate,12);
-  const interval=Math.max(1,Number(repeat.interval)||1);
   const result=[];
   const maxOccurrences=800;
 
-  if(repeat.type==="daily"){
-    for(let key=startDate;key<=until&&result.length<maxOccurrences;key=addDaysToKey(key,1)){
-      const diff=daysBetweenKeys(startDate,key);
-      if(diff%interval===0&&!shouldExcludeRepeatDate(key,repeat))result.push(key);
-    }
-  }else if(repeat.type==="weekly"){
-    const startDay=dateFromKey(startDate).getDay();
-    const weekdays=(repeat.weekdays&&repeat.weekdays.length?repeat.weekdays:[startDay]).map(Number);
-    for(let key=startDate;key<=until&&result.length<maxOccurrences;key=addDaysToKey(key,1)){
-      const diff=daysBetweenKeys(startDate,key);
-      const weekIndex=Math.floor(diff/7);
-      const weekday=dateFromKey(key).getDay();
-      if(weekIndex%interval===0&&weekdays.includes(weekday)&&!shouldExcludeRepeatDate(key,repeat)){
-        result.push(key);
-      }
+  if(repeat.type==="daily"||repeat.type==="weekly"){
+    for(
+      let key=startDate;
+      key<=until&&result.length<maxOccurrences;
+      key=addDaysToKey(key,1)
+    ){
+      if(repeatRuleMatchesDate(key,repeat,startDate))result.push(key);
     }
   }else if(repeat.type==="monthly"){
-    const preferredDay=Math.max(1,Math.min(31,Number(repeat.monthDay)||dateFromKey(startDate).getDate()));
-    for(let monthIndex=0;result.length<maxOccurrences;monthIndex+=interval){
-      const key=addMonthsToKey(startDate,monthIndex,preferredDay);
-      if(key>until)break;
-      if(key>=startDate&&!shouldExcludeRepeatDate(key,repeat))result.push(key);
+    const startObject=dateFromKey(startDate);
+
+    for(
+      let monthIndex=0;
+      monthIndex<2400&&result.length<maxOccurrences;
+      monthIndex+=repeat.interval
+    ){
+      const targetMonth=new Date(
+        startObject.getFullYear(),
+        startObject.getMonth()+monthIndex,
+        1
+      );
+
+      const keys=repeat.monthlyMode==="nthWeekday"
+        ?repeat.monthWeekdays.map(weekday=>
+          nthWeekdayOfMonthKey(
+            targetMonth.getFullYear(),
+            targetMonth.getMonth(),
+            repeat.monthWeek,
+            weekday
+          )
+        )
+        :repeat.monthDays.map(monthDay=>
+          addMonthsToKey(startDate,monthIndex,monthDay)
+        );
+
+      for(const key of [...new Set(keys.filter(Boolean))].sort()){
+        if(key>until)continue;
+        if(key>=startDate&&!shouldExcludeRepeatDate(key,repeat)){
+          result.push(key);
+          if(result.length>=maxOccurrences)break;
+        }
+      }
+
+      const firstOfTarget=dateKey(targetMonth);
+      if(firstOfTarget>until)break;
     }
   }
 
-  return result.length?result:[startDate];
+  return [...new Set(result)].sort();
 }
 function collectRepeatRule(){
-  const type=document.getElementById("scheduleRepeatType")?.value||"none";
-  const interval=Math.max(1,Number(document.getElementById("scheduleRepeatInterval")?.value)||1);
-  const weekdays=[...document.querySelectorAll("[data-repeat-weekday]:checked")].map(input=>Number(input.value));
   const startDate=document.getElementById("scheduleDate")?.value||todayKey();
-  const until=document.getElementById("scheduleRepeatUntil")?.value||startDate;
-  const monthDay=Math.max(1,Math.min(31,Number(document.getElementById("scheduleMonthDay")?.value)||dateFromKey(startDate).getDate()));
+  const monthDays=collectMonthlyDays("schedule");
+  const monthWeekdays=collectMonthlyWeekdays("schedule");
 
-  return {
-    type,
-    interval,
-    weekdays,
-    monthDay,
-    until,
-    excludeSunday:Boolean(document.getElementById("scheduleExcludeSunday")?.checked),
-    excludeHoliday:Boolean(document.getElementById("scheduleExcludeHoliday")?.checked)
-  };
+  return normalizeRepeatRule({
+    type:document.getElementById("scheduleRepeatType")?.value||"none",
+    interval:Math.max(
+      1,
+      Number(document.getElementById("scheduleRepeatInterval")?.value)||1
+    ),
+    weekdays:[...document.querySelectorAll("[data-repeat-weekday]:checked")]
+      .map(input=>Number(input.value)),
+    monthlyMode:document.getElementById("scheduleMonthlyMode")?.value||"day",
+    monthDays,
+    monthDay:monthDays[0]??dateFromKey(startDate).getDate(),
+    monthWeek:document.getElementById("scheduleMonthWeek")?.value||"1",
+    monthWeekdays,
+    monthWeekday:monthWeekdays[0]??dateFromKey(startDate).getDay(),
+    startDate,
+    until:document.getElementById("scheduleRepeatUntil")?.value||startDate,
+    excludeSunday:Boolean(
+      document.getElementById("scheduleExcludeSunday")?.checked
+    ),
+    excludeHoliday:Boolean(
+      document.getElementById("scheduleExcludeHoliday")?.checked
+    )
+  },startDate);
 }
 function setRepeatControls(rule,startDate){
-  const repeat=rule||{
-    type:"none",
-    interval:1,
-    weekdays:[],
-    monthDay:dateFromKey(startDate).getDate(),
-    until:startDate,
-    excludeSunday:false,
-    excludeHoliday:false
-  };
+  const repeat=normalizeRepeatRule(rule,startDate);
 
-  const monthDaySelect=document.getElementById("scheduleMonthDay");
-  if(monthDaySelect&&!monthDaySelect.options.length){
-    monthDaySelect.innerHTML=Array.from({length:31},(_,index)=>index+1)
-      .map(day=>`<option value="${day}">${day}</option>`).join("");
-  }
-
-  document.getElementById("scheduleRepeatType").value=repeat.type||"none";
-  document.getElementById("scheduleRepeatInterval").value=String(repeat.interval||1);
+  document.getElementById("scheduleRepeatType").value=repeat.type;
+  document.getElementById("scheduleRepeatInterval").value=String(repeat.interval);
   document.getElementById("scheduleRepeatStartDisplay").value=startDate;
-  document.getElementById("scheduleRepeatUntil").value=repeat.until||addMonthsToKey(startDate,12);
-  document.getElementById("scheduleMonthDay").value=String(repeat.monthDay||dateFromKey(startDate).getDate());
-  document.getElementById("scheduleExcludeSunday").checked=Boolean(repeat.excludeSunday);
-  document.getElementById("scheduleExcludeHoliday").checked=Boolean(repeat.excludeHoliday);
+  document.getElementById("scheduleRepeatUntil").value=
+    repeat.until||addMonthsToKey(startDate,12);
+  document.getElementById("scheduleMonthlyMode").value=repeat.monthlyMode;
+
+  setMonthlyDayPicker("schedule",repeat.monthDays);
+  document.getElementById("scheduleMonthWeek").value=repeat.monthWeek;
+  setMonthlyWeekdayPicker("schedule",repeat.monthWeekdays);
+
+  document.getElementById("scheduleExcludeSunday").checked=
+    repeat.excludeSunday;
+  document.getElementById("scheduleExcludeHoliday").checked=
+    repeat.excludeHoliday;
 
   document.querySelectorAll("[data-repeat-weekday]").forEach(input=>{
-    input.checked=(repeat.weekdays||[]).map(Number).includes(Number(input.value));
+    input.checked=repeat.weekdays.includes(Number(input.value));
   });
 
   updateRepeatOptions();
 }
 function updateRepeatOptions(){
   const type=document.getElementById("scheduleRepeatType")?.value||"none";
+  const monthlyMode=document.getElementById("scheduleMonthlyMode")?.value||"day";
   const options=document.getElementById("scheduleRepeatOptions");
   const weekdays=document.getElementById("scheduleWeekdayOptions");
   const monthly=document.getElementById("scheduleMonthlyDateOptions");
+  const monthlyDay=document.getElementById("scheduleMonthlyDayPanel");
+  const monthlyWeekday=document.getElementById("scheduleMonthlyWeekdayPanel");
   const unit=document.getElementById("scheduleRepeatUnit");
   const startDate=document.getElementById("scheduleDate")?.value||todayKey();
   const startDisplay=document.getElementById("scheduleRepeatStartDisplay");
@@ -3734,6 +4519,8 @@ function updateRepeatOptions(){
   if(options)options.style.display=type==="none"?"none":"block";
   if(weekdays)weekdays.style.display=type==="weekly"?"block":"none";
   if(monthly)monthly.style.display=type==="monthly"?"block":"none";
+  if(monthlyDay)monthlyDay.style.display=type==="monthly"&&monthlyMode==="day"?"flex":"none";
+  if(monthlyWeekday)monthlyWeekday.style.display=type==="monthly"&&monthlyMode==="nthWeekday"?"flex":"none";
   if(unit)unit.textContent=type==="daily"?"일":type==="weekly"?"주":"개월";
 }
 function habitLevelLabel(level){
@@ -3746,11 +4533,139 @@ function habitActionForLevel(habit,level){
     level==="recovery"?(habit.recovery||""):"";
 }
 
+const HABIT_WEEKDAY_NUMBER={
+  "일":0,"월":1,"화":2,"수":3,"목":4,"금":5,"토":6
+};
+function habitLegacyWeekdays(habit){
+  return parseHabitDays(habit?.days||"")
+    .map(day=>HABIT_WEEKDAY_NUMBER[day])
+    .filter(day=>Number.isInteger(day));
+}
+function habitRepeatRule(habit){
+  const legacyWeekdays=habitLegacyWeekdays(habit);
+  const legacyEveryDay=legacyWeekdays.length===7||String(habit?.days||"").trim()==="매일";
+  const fallbackStart=String(
+    habit?.repeat?.startDate||
+    habit?.startDate||
+    `${todayKey().slice(0,4)}-01-01`
+  );
+
+  return normalizeRepeatRule(
+    habit?.repeat||{
+      type:legacyEveryDay?"daily":"weekly",
+      interval:1,
+      weekdays:legacyWeekdays,
+      startDate:fallbackStart,
+      until:addMonthsToKey(todayKey(),12)
+    },
+    fallbackStart,
+    legacyWeekdays
+  );
+}
+function habitDaysFromRepeat(rule){
+  const normalized=normalizeRepeatRule(rule,rule?.startDate||todayKey());
+  const names=["일","월","화","수","목","금","토"];
+  if(normalized.type==="daily")return "매일";
+  if(normalized.type==="weekly"){
+    return normalized.weekdays.map(day=>names[day]).join("·");
+  }
+  if(normalized.type==="monthly")return repeatLabel(normalized);
+  return formatDateKo(normalized.startDate);
+}
+function habitRepeatDisplay(habit){
+  return repeatLabel(habitRepeatRule(habit));
+}
+function collectHabitRepeatRule(){
+  const startDate=document.getElementById("habitRepeatStart")?.value||todayKey();
+  const selectedWeekdays=[
+    ...document.querySelectorAll("[data-habit-weekday].selected")
+  ]
+    .map(button=>HABIT_WEEKDAY_NUMBER[button.dataset.habitWeekday])
+    .filter(day=>Number.isInteger(day));
+
+  const monthDays=collectMonthlyDays("habit");
+  const monthWeekdays=collectMonthlyWeekdays("habit");
+
+  return normalizeRepeatRule({
+    type:document.getElementById("habitRepeatType")?.value||"weekly",
+    interval:Math.max(
+      1,
+      Number(document.getElementById("habitRepeatInterval")?.value)||1
+    ),
+    weekdays:selectedWeekdays,
+    monthlyMode:document.getElementById("habitMonthlyMode")?.value||"day",
+    monthDays,
+    monthDay:monthDays[0]??dateFromKey(startDate).getDate(),
+    monthWeek:document.getElementById("habitMonthWeek")?.value||"1",
+    monthWeekdays,
+    monthWeekday:monthWeekdays[0]??dateFromKey(startDate).getDay(),
+    startDate,
+    until:document.getElementById("habitRepeatUntil")?.value||startDate,
+    excludeSunday:Boolean(
+      document.getElementById("habitExcludeSunday")?.checked
+    ),
+    excludeHoliday:Boolean(
+      document.getElementById("habitExcludeHoliday")?.checked
+    )
+  },startDate,selectedWeekdays);
+}
+function updateHabitRepeatPreview(){
+  const preview=document.getElementById("habitDaysPreview");
+  if(!preview)return;
+  preview.textContent=`반복 · ${repeatLabel(collectHabitRepeatRule())}`;
+}
+function updateHabitRepeatOptions(){
+  const type=document.getElementById("habitRepeatType")?.value||"weekly";
+  const monthlyMode=document.getElementById("habitMonthlyMode")?.value||"day";
+  const options=document.getElementById("habitRepeatOptions");
+  const weekdays=document.getElementById("habitWeekdayOptions");
+  const monthly=document.getElementById("habitMonthlyOptions");
+  const monthlyDay=document.getElementById("habitMonthlyDayPanel");
+  const monthlyWeekday=document.getElementById("habitMonthlyWeekdayPanel");
+  const unit=document.getElementById("habitRepeatUnit");
+
+  if(options)options.style.display=type==="none"?"block":"block";
+  if(weekdays)weekdays.style.display=type==="weekly"?"block":"none";
+  if(monthly)monthly.style.display=type==="monthly"?"block":"none";
+  if(monthlyDay)monthlyDay.style.display=type==="monthly"&&monthlyMode==="day"?"flex":"none";
+  if(monthlyWeekday)monthlyWeekday.style.display=type==="monthly"&&monthlyMode==="nthWeekday"?"flex":"none";
+  if(unit)unit.textContent=type==="daily"?"일":type==="weekly"?"주":"개월";
+
+  updateHabitRepeatPreview();
+}
+function setHabitRepeatControls(habit){
+  const rule=habitRepeatRule(habit||{days:"매일"});
+
+  document.getElementById("habitRepeatType").value=rule.type;
+  document.getElementById("habitRepeatInterval").value=String(rule.interval);
+  document.getElementById("habitRepeatStart").value=rule.startDate;
+  document.getElementById("habitRepeatUntil").value=rule.until;
+  document.getElementById("habitMonthlyMode").value=rule.monthlyMode;
+
+  setMonthlyDayPicker("habit",rule.monthDays);
+  document.getElementById("habitMonthWeek").value=rule.monthWeek;
+  setMonthlyWeekdayPicker("habit",rule.monthWeekdays);
+
+  document.getElementById("habitExcludeSunday").checked=
+    rule.excludeSunday;
+  document.getElementById("habitExcludeHoliday").checked=
+    rule.excludeHoliday;
+
+  const weekdayNames=["일","월","화","수","목","금","토"];
+
+  setHabitDaysPicker(
+    rule.type==="daily"
+      ?"매일"
+      :rule.type==="weekly"
+        ?rule.weekdays.map(day=>weekdayNames[day]).join("·")
+        :""
+  );
+
+  updateHabitRepeatOptions();
+}
 function habitAppliesToDate(habit,date){
-  const selectedDays=parseHabitDays(habit?.days||"");
-  if(!selectedDays.length)return false;
-  const dayName=HABIT_WEEKDAYS[dateFromKey(date).getDay()];
-  return selectedDays.includes(dayName);
+  const rule=habitRepeatRule(habit);
+  return repeatRuleMatchesDate(date,rule,rule.startDate);
 }
 
 function habitScheduleRange(habit){
@@ -3777,6 +4692,7 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
   const habit=data.habits.find(item=>item.id===habitId);
   if(!habit)return null;
 
+  const rule=habitRepeatRule(habit);
   const applies=habitAppliesToDate(habit,date);
   const matching=(data.schedules||[]).filter(item=>
     item.date===date&&item.kind==="habit"&&item.habitId===habitId
@@ -3795,10 +4711,8 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
     return existing&&!existing.autoFromHabitDefinition?existing:null;
   }
 
-  const day=ensureDay(date);
-  const level=(day.habitChecks||{})[habitId]||"normal";
-  day.habitChecks[habitId]=level;
-
+  const storedDay=data.today?.[date]||null;
+  const level=(storedDay?.habitChecks||{})[habitId]||"normal";
   const action=habitActionForLevel(habit,level);
   const range=habitScheduleRange(habit);
   let target=existing;
@@ -3806,8 +4720,8 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
   if(!target&&createIfMissing){
     target={
       id:`habit_auto_${habitId}_${date}`,
-      seriesId:"",
-      seriesStart:date,
+      seriesId:`habit_auto_${habitId}`,
+      seriesStart:rule.startDate,
       date,
       time:range.time,
       endTime:range.endTime,
@@ -3816,15 +4730,7 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
       habitId,
       title:habit.name,
       memo:"",
-      repeat:{
-        type:"none",
-        interval:1,
-        weekdays:[],
-        monthDay:dateFromKey(date).getDate(),
-        until:date,
-        excludeSunday:false,
-        excludeHoliday:false
-      },
+      repeat:{...rule},
       done:false,
       autoFromHabitDefinition:true
     };
@@ -3837,10 +4743,17 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
     target.endTime=range.endTime;
     target.duration=range.duration;
     target.memo=action?`${habitLevelLabel(level)} · ${action}`:"";
-    target.autoFromHabitDefinition=Boolean(
-      target.autoFromHabitDefinition||!existing
-    );
-    day.habitTimes[habitId]=range.time;
+    target.repeat={...rule};
+    target.seriesStart=rule.startDate;
+    if(target.autoFromHabitDefinition){
+      target.seriesId=`habit_auto_${habitId}`;
+    }
+  }
+
+  if(storedDay){
+    storedDay.habitTimes=storedDay.habitTimes||{};
+    storedDay.habitTimes[habitId]=range.time;
+    upsertDailyRecord(date,storedDay);
   }
 
   matching.slice(1).forEach(duplicate=>{
@@ -3849,7 +4762,6 @@ function applyHabitDefinitionToDate(habitId,date=todayKey(),createIfMissing=true
     }
   });
 
-  upsertDailyRecord(date,day);
   return target;
 }
 
@@ -3863,6 +4775,55 @@ function applyAllHabitDefinitionsToToday(createIfMissing=true){
   renderSelectedDay();
 }
 
+function rebuildHabitAutoScheduleSeries(habitId){
+  const habit=data.habits.find(item=>item.id===habitId);
+  if(!habit)return [];
+
+  data.schedules=(data.schedules||[]).filter(item=>!(
+    item.kind==="habit"&&
+    item.habitId===habitId&&
+    item.autoFromHabitDefinition
+  ));
+
+  const rule=habitRepeatRule(habit);
+  const dates=buildRepeatDates(rule.startDate,rule);
+  const created=[];
+
+  dates.forEach(date=>{
+    const item=applyHabitDefinitionToDate(habitId,date,true);
+    if(item)created.push(item);
+  });
+
+  return created;
+}
+function auditLinkedAppData(){
+  managedPrincipleOptions();
+
+  data.habits=(data.habits||[]).map(habit=>{
+    const repeat=habitRepeatRule(habit);
+    return {
+      ...habit,
+      repeat,
+      days:habitDaysFromRepeat(repeat)
+    };
+  });
+
+  data.stopHabits=(data.stopHabits||[]).map(item=>({
+    ...item,
+    repeat:stopHabitRepeatRule(item)
+  }));
+
+  (data.schedules||[]).forEach(item=>{
+    if(item.kind!=="habit")return;
+    const habit=data.habits.find(entry=>entry.id===item.habitId);
+    if(!habit)return;
+    item.title=habit.name;
+    syncHabitScheduleContent(item.date,item.habitId);
+  });
+
+  data.appFeatureSchemaVersion=APP_FEATURE_SCHEMA_VERSION;
+  saveData();
+}
 function syncHabitScheduleContent(date,habitId){
   const habit=data.habits.find(item=>item.id===habitId);
   const day=ensureDay(date);
@@ -4256,6 +5217,10 @@ function switchView(name,direction=""){
     renderHabits();
     renderToday();
   }
+  if(name==="stop"){
+    renderStopHabits();
+    renderTodayBehaviorStandards(selectedCalendarDate||todayKey());
+  }
   if(name==="shake")renderAgency();
 }
 function renderToday(){
@@ -4276,6 +5241,7 @@ function renderToday(){
 
   document.getElementById("dailyMemo").value=day.memo||"";
   renderTodayRecord();
+  renderTodayBehaviorStandards();
 
   const box=document.getElementById("todayHabits");
   if(!data.habits.length){
@@ -4288,7 +5254,7 @@ function renderToday(){
         <div class="habit-row-top">
           <div class="habit-row-identity">
             <h3>${escapeHtml(habit.name)}</h3>
-            <span>${escapeHtml(habit.identity)} · ${escapeHtml(habit.days)}</span>
+            <span>${escapeHtml(habit.identity)} · ${escapeHtml(habitRepeatDisplay(habit))}</span>
           </div>
           <span class="habit-placement-state ${scheduled?"scheduled":"not-scheduled"}">
             ${scheduled?"시간표 배치됨":"미배치"}
@@ -4728,36 +5694,334 @@ function updateHabitTimePreview(){
   preview.classList.toggle("invalid",!range.valid);
 }
 
-function renderHabits(){
-  const box=document.getElementById("habitsList");
-  if(!data.habits.length){box.innerHTML=`<div class="empty">아직 습관이 없습니다.</div>`;return;}
-  box.innerHTML=data.habits.map(h=>`<div class="card">
-    <h3>${escapeHtml(h.name)}</h3>
-    <div class="habit-meta">${escapeHtml(h.identity)} · ${escapeHtml(h.days)} · ${escapeHtml(h.time)}</div>
-    <p><b>신호</b> ${escapeHtml(h.cue)}</p>
-    <p><b>정상</b> ${escapeHtml(h.normal)}</p>
-    <p><b>최소</b> ${escapeHtml(h.minimum)}</p>
-    <p><b>회복</b> ${escapeHtml(h.recovery)}</p>
-    <div class="row"><button class="secondary" data-edit-habit="${h.id}">수정</button><button class="danger" data-delete-habit="${h.id}">삭제</button></div>
-  </div>`).join("");
-  document.querySelectorAll("[data-edit-habit]").forEach(b=>b.onclick=()=>openHabitModal(b.dataset.editHabit));
-  document.querySelectorAll("[data-delete-habit]").forEach(b=>b.onclick=()=>{
-    if(confirm("이 습관을 삭제할까요?")){
-      const habitId=b.dataset.deleteHabit;
-      data.habits=data.habits.filter(h=>h.id!==habitId);
-      data.schedules=(data.schedules||[]).filter(item=>!(
-        item.kind==="habit"&&item.habitId===habitId
-      ));
-      Object.values(data.today||{}).forEach(day=>{
-        if(day.habitChecks)delete day.habitChecks[habitId];
-        if(day.habitTimes)delete day.habitTimes[habitId];
-      });
-      saveData();
-      renderHabits();
-      renderToday();
-      renderReview();
+
+function stopHabitRepeatRule(item){
+  const startDate=String(
+    item?.repeat?.startDate||
+    item?.startDate||
+    todayKey()
+  );
+  return normalizeRepeatRule(
+    item?.repeat||{
+      type:"daily",
+      interval:1,
+      startDate,
+      until:addMonthsToKey(startDate,12)
+    },
+    startDate
+  );
+}
+
+function stopHabitAppliesToDate(item,date){
+  const rule=stopHabitRepeatRule(item);
+  return repeatRuleMatchesDate(date,rule,rule.startDate);
+}
+
+function collectStopHabitRepeatRule(){
+  const startDate=document.getElementById("stopRepeatStart")?.value||todayKey();
+  const weekdays=[
+    ...document.querySelectorAll("[data-stop-weekday].selected")
+  ]
+    .map(button=>Number(button.value))
+    .filter(day=>day>=0&&day<=6);
+
+  const monthDays=collectMonthlyDays("stop");
+  const monthWeekdays=collectMonthlyWeekdays("stop");
+
+  return normalizeRepeatRule({
+    type:document.getElementById("stopRepeatType")?.value||"daily",
+    interval:Math.max(
+      1,
+      Number(document.getElementById("stopRepeatInterval")?.value)||1
+    ),
+    weekdays,
+    monthlyMode:document.getElementById("stopMonthlyMode")?.value||"day",
+    monthDays,
+    monthDay:monthDays[0]??dateFromKey(startDate).getDate(),
+    monthWeek:document.getElementById("stopMonthWeek")?.value||"1",
+    monthWeekdays,
+    monthWeekday:monthWeekdays[0]??dateFromKey(startDate).getDay(),
+    startDate,
+    until:document.getElementById("stopRepeatUntil")?.value||startDate,
+    excludeSunday:Boolean(
+      document.getElementById("stopExcludeSunday")?.checked
+    ),
+    excludeHoliday:Boolean(
+      document.getElementById("stopExcludeHoliday")?.checked
+    )
+  },startDate,weekdays);
+}
+
+function updateStopHabitRepeatPreview(){
+  const preview=document.getElementById("stopRepeatPreview");
+  if(preview)preview.textContent=`반복 · ${repeatLabel(collectStopHabitRepeatRule())}`;
+}
+
+function updateStopHabitRepeatOptions(){
+  const type=document.getElementById("stopRepeatType")?.value||"daily";
+  const monthlyMode=document.getElementById("stopMonthlyMode")?.value||"day";
+  const options=document.getElementById("stopRepeatOptions");
+  const weekdays=document.getElementById("stopWeekdayOptions");
+  const monthly=document.getElementById("stopMonthlyOptions");
+  const monthlyDay=document.getElementById("stopMonthlyDayPanel");
+  const monthlyWeekday=document.getElementById("stopMonthlyWeekdayPanel");
+  const unit=document.getElementById("stopRepeatUnit");
+
+  if(options)options.style.display="block";
+  if(weekdays)weekdays.style.display=type==="weekly"?"block":"none";
+  if(monthly)monthly.style.display=type==="monthly"?"block":"none";
+  if(monthlyDay)monthlyDay.style.display=type==="monthly"&&monthlyMode==="day"?"flex":"none";
+  if(monthlyWeekday)monthlyWeekday.style.display=type==="monthly"&&monthlyMode==="nthWeekday"?"flex":"none";
+  if(unit)unit.textContent=type==="daily"?"일":type==="weekly"?"주":"개월";
+  updateStopHabitRepeatPreview();
+}
+
+function setStopHabitRepeatControls(item){
+  const rule=stopHabitRepeatRule(item||{});
+
+  document.getElementById("stopRepeatType").value=rule.type;
+  document.getElementById("stopRepeatInterval").value=String(rule.interval);
+  document.getElementById("stopRepeatStart").value=rule.startDate;
+  document.getElementById("stopRepeatUntil").value=rule.until;
+  document.getElementById("stopMonthlyMode").value=rule.monthlyMode;
+
+  setMonthlyDayPicker("stop",rule.monthDays);
+  document.getElementById("stopMonthWeek").value=rule.monthWeek;
+  setMonthlyWeekdayPicker("stop",rule.monthWeekdays);
+
+  document.getElementById("stopExcludeSunday").checked=
+    rule.excludeSunday;
+  document.getElementById("stopExcludeHoliday").checked=
+    rule.excludeHoliday;
+
+  document.querySelectorAll("[data-stop-weekday]").forEach(button=>{
+    const active=rule.weekdays.includes(Number(button.value));
+    button.classList.toggle("selected",active);
+    button.setAttribute("aria-pressed",active?"true":"false");
+  });
+
+  updateStopHabitRepeatOptions();
+}
+
+function openStopHabitModal(id=""){
+  const item=(data.stopHabits||[]).find(entry=>entry.id===id);
+  document.getElementById("stopHabitModalTitle").textContent=
+    item?"멈출 행동 수정":"멈출 행동 추가";
+  document.getElementById("stopHabitId").value=item?.id||"";
+  document.getElementById("stopHabitName").value=item?.name||"";
+  document.getElementById("stopHabitIdentity").innerHTML=identityOptions()
+    .map(option=>`<option ${item?.identity===option?"selected":""}>${escapeHtml(option)}</option>`)
+    .join("");
+  document.getElementById("stopHabitTrigger").value=item?.trigger||"";
+  document.getElementById("stopHabitAction").value=item?.stopAction||"";
+  document.getElementById("stopHabitReplacement").value=item?.replacement||"";
+  document.getElementById("stopHabitReflection").value=item?.reflection||"";
+  setStopHabitRepeatControls(item||{
+    repeat:{
+      type:"daily",
+      interval:1,
+      startDate:todayKey(),
+      until:addMonthsToKey(todayKey(),12)
     }
   });
+  clearSaveState("stopHabitSaveStatus");
+  document.getElementById("stopHabitModal").classList.add("show");
+}
+
+function stopHabitStatusOptions(value=""){
+  const options=[
+    ["","상태 선택"],
+    ["kept","지켰음"],
+    ["noticed","알아차림"],
+    ["slipped","놓쳤음"],
+    ["recovered","복귀함"]
+  ];
+  return options.map(([key,label])=>
+    `<option value="${key}" ${value===key?"selected":""}>${label}</option>`
+  ).join("");
+}
+
+function renderStopHabitDailyList(containerId,date){
+  const box=document.getElementById(containerId);
+  if(!box)return;
+
+  const day=ensureDay(date);
+  const items=(data.stopHabits||[]).filter(item=>stopHabitAppliesToDate(item,date));
+  if(!items.length){
+    box.innerHTML=`<div class="empty">이 날짜에 설정된 멈출 행동이 없습니다.</div>`;
+    return;
+  }
+
+  box.innerHTML=items.map(item=>`
+    <div class="today-stop-habit-row">
+      <div>
+        <b>${escapeHtml(item.name)}</b>
+        <small>${escapeHtml(item.stopAction||"하지 않기로 한 행동")}</small>
+      </div>
+      <select data-stop-daily-status="${escapeHtml(item.id)}" data-stop-daily-date="${date}">
+        ${stopHabitStatusOptions((day.stopHabitChecks||{})[item.id]||"")}
+      </select>
+      <input data-stop-daily-note="${escapeHtml(item.id)}" data-stop-daily-date="${date}"
+        value="${escapeHtml((day.stopHabitNotes||{})[item.id]||"")}"
+        placeholder="반성·복귀 메모">
+    </div>
+  `).join("");
+
+  box.querySelectorAll("[data-stop-daily-status]").forEach(select=>{
+    select.onchange=()=>{
+      const targetDay=ensureDay(select.dataset.stopDailyDate);
+      targetDay.stopHabitChecks[select.dataset.stopDailyStatus]=select.value;
+      upsertDailyRecord(select.dataset.stopDailyDate,targetDay);
+      saveData();
+    };
+  });
+  box.querySelectorAll("[data-stop-daily-note]").forEach(input=>{
+    input.oninput=()=>{
+      const targetDay=ensureDay(input.dataset.stopDailyDate);
+      targetDay.stopHabitNotes[input.dataset.stopDailyNote]=input.value.trim();
+      upsertDailyRecord(input.dataset.stopDailyDate,targetDay);
+      saveData();
+    };
+  });
+}
+
+function renderStopHabits(){
+  const list=document.getElementById("stopHabitsList");
+  if(list){
+    if(!(data.stopHabits||[]).length){
+      list.innerHTML=`<div class="empty">아직 등록한 멈출 행동이 없습니다.</div>`;
+    }else{
+      list.innerHTML=data.stopHabits.map(item=>`
+        <div class="card stop-habit-card">
+          <h3>${escapeHtml(item.name)}</h3>
+          <div class="habit-meta">${escapeHtml(item.identity)} · ${escapeHtml(repeatLabel(stopHabitRepeatRule(item)))}</div>
+          <p><b>유발 상황</b> ${escapeHtml(item.trigger||"-")}</p>
+          <p class="stop-habit-main"><b>멈출 행동</b> ${escapeHtml(item.stopAction||"-")}</p>
+          <p><b>대신 할 행동</b> ${escapeHtml(item.replacement||"-")}</p>
+          <p><b>반성·복귀</b> ${escapeHtml(item.reflection||"-")}</p>
+          <div class="row">
+            <button class="secondary" data-edit-stop-habit="${escapeHtml(item.id)}">수정</button>
+            <button class="danger" data-delete-stop-habit="${escapeHtml(item.id)}">삭제</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    list.querySelectorAll("[data-edit-stop-habit]").forEach(button=>{
+      button.onclick=()=>openStopHabitModal(button.dataset.editStopHabit);
+    });
+    list.querySelectorAll("[data-delete-stop-habit]").forEach(button=>{
+      button.onclick=()=>{
+        if(!confirm("이 멈출 행동을 삭제할까요?"))return;
+        const id=button.dataset.deleteStopHabit;
+        data.stopHabits=data.stopHabits.filter(item=>item.id!==id);
+        Object.values(data.today||{}).forEach(day=>{
+          if(day.stopHabitChecks)delete day.stopHabitChecks[id];
+          if(day.stopHabitNotes)delete day.stopHabitNotes[id];
+        });
+        saveData();
+        renderStopHabits();
+        renderTodayBehaviorStandards();
+        toast("멈출 행동을 삭제했습니다.");
+      };
+    });
+  }
+
+  renderStopHabitDailyList("todayStopHabits",todayKey());
+}
+
+function saveStopHabitDailyRecord(date=selectedCalendarDate||todayKey()){
+  document.querySelectorAll(`[data-stop-daily-status][data-stop-daily-date="${date}"]`).forEach(select=>{
+    const day=ensureDay(date);
+    day.stopHabitChecks[select.dataset.stopDailyStatus]=select.value;
+    upsertDailyRecord(date,day);
+  });
+  document.querySelectorAll(`[data-stop-daily-note][data-stop-daily-date="${date}"]`).forEach(input=>{
+    const day=ensureDay(date);
+    day.stopHabitNotes[input.dataset.stopDailyNote]=input.value.trim();
+    upsertDailyRecord(date,day);
+  });
+  saveData();
+  renderTodayBehaviorStandards();
+  renderStopHabits();
+
+  const isToday=date===todayKey();
+  const message=isToday
+    ?"저장되었습니다. 오늘의 멈출 행동 기록에 반영되었습니다."
+    :"저장되었습니다. 선택한 날짜의 행동 기준에 반영되었습니다.";
+
+  showSaveState("stopHabitsRecordStatus",message);
+  showSaveState("behaviorStandardsStatus",message);
+  toast("멈출 행동 기록을 저장했습니다.");
+}
+
+function renderTodayBehaviorStandards(){
+  const doBox=document.getElementById("todayBehaviorDoList");
+  const stopBox=document.getElementById("todayBehaviorStopList");
+  if(!doBox||!stopBox)return;
+
+  const date=selectedCalendarDate||todayKey();
+  const day=ensureDay(date);
+  const title=document.getElementById("selectedBehaviorTitle");
+  if(title){
+    title.childNodes[0].nodeValue=
+      date===todayKey()?"오늘의 행동 기준 ":`${formatDateKo(date)}의 행동 기준 `;
+  }
+
+  const good=(data.habits||[]).filter(habit=>habitAppliesToDate(habit,date));
+  doBox.innerHTML=good.length?good.map(habit=>{
+    const level=(day.habitChecks||{})[habit.id]||"normal";
+    const action=habitActionForLevel(habit,level);
+    return `<div class="behavior-action-item">
+      <b>${escapeHtml(habit.name)}</b>
+      <span>${escapeHtml(habitLevelLabel(level))} · ${escapeHtml(action||habit.normal||"실천 행동")}</span>
+    </div>`;
+  }).join(""):`<div class="empty">이 날짜에 설정된 실천 습관이 없습니다.</div>`;
+
+  renderStopHabitDailyList("todayBehaviorStopList",date);
+}
+
+function switchHabitCategory(category){
+  switchView(category==="stop"?"stop":"habits");
+}
+
+function renderHabits(){
+  const box=document.getElementById("habitsList");
+  if(box){
+    if(!data.habits.length){
+      box.innerHTML=`<div class="empty">아직 습관이 없습니다.</div>`;
+    }else{
+      box.innerHTML=data.habits.map(h=>`<div class="card">
+        <h3>${escapeHtml(h.name)}</h3>
+        <div class="habit-meta">${escapeHtml(h.identity)} · ${escapeHtml(habitRepeatDisplay(h))} · ${escapeHtml(h.time)}</div>
+        <p><b>신호</b> ${escapeHtml(h.cue)}</p>
+        <p><b>정상</b> ${escapeHtml(h.normal)}</p>
+        <p><b>최소</b> ${escapeHtml(h.minimum)}</p>
+        <p><b>회복</b> ${escapeHtml(h.recovery)}</p>
+        <div class="row"><button class="secondary" data-edit-habit="${h.id}">수정</button><button class="danger" data-delete-habit="${h.id}">삭제</button></div>
+      </div>`).join("");
+    }
+
+    document.querySelectorAll("[data-edit-habit]").forEach(b=>b.onclick=()=>openHabitModal(b.dataset.editHabit));
+    document.querySelectorAll("[data-delete-habit]").forEach(b=>b.onclick=()=>{
+      if(confirm("이 습관을 삭제할까요?")){
+        const habitId=b.dataset.deleteHabit;
+        data.habits=data.habits.filter(h=>h.id!==habitId);
+        data.schedules=(data.schedules||[]).filter(item=>!(
+          item.kind==="habit"&&item.habitId===habitId
+        ));
+        Object.values(data.today||{}).forEach(day=>{
+          if(day.habitChecks)delete day.habitChecks[habitId];
+          if(day.habitTimes)delete day.habitTimes[habitId];
+        });
+        saveData();
+        renderHabits();
+        renderToday();
+        renderReview();
+      }
+    });
+  }
+  renderStopHabits();
 }
 function openHabitModal(id=""){
   const h=data.habits.find(x=>x.id===id);
@@ -4768,7 +6032,15 @@ function openHabitModal(id=""){
     .map(option=>`<option ${h?.identity===option?"selected":""}>${option}</option>`)
     .join("");
 
-  setHabitDaysPicker(h?.days||"매일");
+  setHabitRepeatControls(h||{
+    days:"매일",
+    repeat:{
+      type:"daily",
+      interval:1,
+      startDate:todayKey(),
+      until:addMonthsToKey(todayKey(),12)
+    }
+  });
   setHabitTimeRangePicker(
     h?.time||"오전 6:00 ~ 오전 6:30",
     h?.startTime||"",
@@ -4779,6 +6051,7 @@ function openHabitModal(id=""){
   document.getElementById("habitNormal").value=h?.normal||"";
   document.getElementById("habitMinimum").value=h?.minimum||"";
   document.getElementById("habitRecovery").value=h?.recovery||"";
+  clearSaveState("habitSaveStatus");
   document.getElementById("habitModal").classList.add("show");
 }
 function formatDateKo(key){
@@ -4899,7 +6172,9 @@ function openCalendarDayModal(date){
       getDayChoices(day).length||
       getDayEvidences(day).length||
       day.memo||
-      day.tomorrow
+      day.tomorrow||
+      Object.values(day.stopHabitChecks||{}).some(Boolean)||
+      Object.values(day.stopHabitNotes||{}).some(Boolean)
     );
 
     cells.push(`<button class="calendar-day ${date.getMonth()!==month?"outside":""} ${key===todayKey()?"today":""} ${key===selectedCalendarDate?"selected":""}" data-calendar-date="${key}">
@@ -4986,6 +6261,8 @@ function renderSelectedDay(){
       ?renderDayTimeline(day,selectedCalendarDate,[])
       :`<div class="record-empty">이 날짜에 저장된 정체성 기록이 없습니다.</div>`;
   }
+
+  renderTodayBehaviorStandards();
 }
 function renderScheduleList(){
   const box=document.getElementById("scheduleList");
@@ -5018,10 +6295,27 @@ function openScheduleModal(id="",forcedDate="",presetTime="",presetKind="schedul
     kind==="habit"?(habit?.name||item?.title||""):(item?.title||"");
   document.getElementById("scheduleMemo").value=kind==="habit"?"":(item?.memo||"");
 
-  setRepeatControls(item?.repeat||{type:"none",interval:1,weekdays:[],until:modalDate,excludeSunday:false,excludeHoliday:false},modalDate);
+  const defaultRepeat=kind==="habit"&&habit
+    ?habitRepeatRule(habit)
+    :{
+      type:"none",
+      interval:1,
+      weekdays:[],
+      monthlyMode:"day",
+      monthDay:dateFromKey(modalDate).getDate(),
+      monthWeek:"1",
+      monthWeekday:dateFromKey(modalDate).getDay(),
+      startDate:modalDate,
+      until:modalDate,
+      excludeSunday:false,
+      excludeHoliday:false
+    };
+
+  setRepeatControls(item?.repeat||defaultRepeat,modalDate);
 
   document.getElementById("saveSchedule").textContent=
     kind==="habit"?"습관 배치 저장":"일정 저장";
+  clearSaveState("scheduleSaveStatus");
   document.getElementById("scheduleModal").classList.add("show");
 }
 function renderReview(){
@@ -5093,7 +6387,9 @@ function upsertDailyRecord(date,day){
   const hasContent=Boolean(
     evidences.length||day.memo||day.tomorrow||choices.length||
     Object.keys(day.habitChecks||{}).some(id=>day.habitChecks[id])||
-    Object.keys(day.habitTimes||{}).some(id=>day.habitTimes[id])
+    Object.keys(day.habitTimes||{}).some(id=>day.habitTimes[id])||
+    Object.keys(day.stopHabitChecks||{}).some(id=>day.stopHabitChecks[id])||
+    Object.keys(day.stopHabitNotes||{}).some(id=>day.stopHabitNotes[id])
   );
   const index=data.records.findIndex(record=>record.date===date);
   if(hasContent){
@@ -5108,7 +6404,9 @@ function upsertDailyRecord(date,day){
       memo:day.memo||"",
       tomorrow:day.tomorrow||"",
       habitChecks:{...(day.habitChecks||{})},
-      habitTimes:{...(day.habitTimes||{})}
+      habitTimes:{...(day.habitTimes||{})},
+      stopHabitChecks:{...(day.stopHabitChecks||{})},
+      stopHabitNotes:{...(day.stopHabitNotes||{})}
     };
     if(index>=0)data.records[index]={...data.records[index],...record};
     else data.records.push(record);
@@ -5121,6 +6419,27 @@ function setAutoSaveStatus(id,text="자동 저장되었습니다."){
   clearTimeout(el._statusTimer);
   el._statusTimer=setTimeout(()=>{el.textContent="입력한 내용은 이 기기에 자동 저장됩니다.";},1600);
 }
+function showSaveState(id,message="저장되었습니다.",kind="success"){
+  const element=document.getElementById(id);
+  if(!element)return;
+  element.textContent=message;
+  element.classList.remove("success","warning");
+  if(kind)element.classList.add(kind);
+}
+function clearSaveState(id){
+  const element=document.getElementById(id);
+  if(!element)return;
+  element.textContent="";
+  element.classList.remove("success","warning");
+}
+function renderAllLinkedViews(){
+  renderIdentity();
+  renderToday();
+  renderHabits();
+  renderReview();
+  renderTodayBehaviorStandards();
+}
+
 function saveTodayDraftNow(){
   const day=ensureToday();
   const evidenceEntries=collectMultiEntries("dailyEvidence","",true);
@@ -5163,25 +6482,33 @@ function savePrinciplesRecordNow(){
   renderIdentityChoicePrinciples();
   renderCalendar();
   renderReview();
+  showSaveState(
+    "principlesRecordStatus",
+    `저장되었습니다. 선택한 원칙 ${values.length}개가 오늘 기록에 반영되었습니다.`
+  );
   toast("오늘 지킬 원칙을 기록했습니다.");
 }
 
 function saveHabitsRecordNow(){
   const day=ensureToday();
+  let reflected=0;
 
   document.querySelectorAll("[data-habit-level]").forEach(select=>{
     const habitId=select.dataset.habitLevel;
-    if(select.value)day.habitChecks[habitId]=select.value;
-    else day.habitChecks[habitId]="normal";
+    day.habitChecks[habitId]=select.value||"normal";
 
-    applyHabitDefinitionToDate(habitId,todayKey(),true);
+    if(applyHabitDefinitionToDate(habitId,todayKey(),true)){
+      reflected+=1;
+    }
   });
 
   upsertDailyRecord(todayKey(),day);
   saveData();
-  renderToday();
-  renderHabits();
-  renderReview();
+  renderAllLinkedViews();
+  showSaveState(
+    "habitsRecordStatus",
+    `저장되었습니다. 오늘 일정에 습관 ${reflected}개를 반영했습니다.`
+  );
   toast("습관의 시간과 실행 내용을 오늘 일정에 반영했습니다.");
 }
 
@@ -5526,24 +6853,25 @@ function replacePrincipleInSavedRecords(oldText,newText){
 
 
 function finalizePrincipleManagerSave(){
-  managedPrincipleOptions();
+  const livePrinciples=managedPrincipleOptions();
   data.principleLibraryRevision=
     Math.max(1,Number(data.principleLibraryRevision)||0)+1;
   data.tomorrowActionLibraryRevision=0;
+  data.principleDropdownSchemaVersion=
+    PRINCIPLE_DROPDOWN_SCHEMA_VERSION;
+  data.principleLibrarySavedAt=new Date().toISOString();
 
   saveData();
   refreshAllPrincipleDropdowns();
   renderPrincipleManager();
-  renderIdentity();
-  renderToday();
-  renderReview();
+  renderAllLinkedViews();
 
-  const saveStatus=document.getElementById("principleManagerSaveStatus");
-  if(saveStatus){
-    saveStatus.textContent="저장되었습니다.";
-    saveStatus.classList.add("success");
-  }
+  const message=
+    `저장되었습니다. ${livePrinciples.length}개 원칙이 `+
+    `오늘 원칙·오늘의 마무리·내일의 작은 행동 드롭다운에 반영되었습니다.`;
 
+  showSaveState("principleManagerSaveStatus",message);
+  showSaveState("principlesRecordStatus",message);
   toast("저장되었습니다.");
 }
 
@@ -5563,7 +6891,7 @@ function openPrincipleManager(){
 }
 
 
-const TAB_SWIPE_ORDER=["today","identity","habits","shake"];
+const TAB_SWIPE_ORDER=["today","identity","habits","stop","shake"];
 let tabSwipeState=null;
 
 function activeTabName(){
@@ -5761,6 +7089,48 @@ function bind(){
   setupTabSwipeNavigation();
   document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 
+  document.querySelectorAll("[data-habit-category]").forEach(button=>{
+    button.onclick=()=>switchHabitCategory(button.dataset.habitCategory);
+  });
+
+  document.querySelectorAll("[data-month-day-scope]").forEach(button=>{
+    button.onclick=()=>{
+      const scope=button.dataset.monthDayScope;
+      button.classList.toggle("selected");
+
+      let selected=collectMonthlyDays(scope);
+      if(!selected.length){
+        button.classList.add("selected");
+        selected=collectMonthlyDays(scope);
+      }
+
+      setMonthlyDayPicker(scope,selected);
+
+      if(scope==="schedule"){
+        updateRepeatOptions();
+      }else if(scope==="habit"){
+        updateHabitRepeatOptions();
+      }else{
+        updateStopHabitRepeatOptions();
+      }
+    };
+  });
+
+  document.querySelectorAll("[data-month-weekday-scope]").forEach(button=>{
+    button.onclick=()=>{
+      const scope=button.dataset.monthWeekdayScope;
+      button.classList.toggle("selected");
+      const selected=collectMonthlyWeekdays(scope);
+      if(!selected.length){
+        button.classList.add("selected");
+      }
+      setMonthlyWeekdayPicker(scope,collectMonthlyWeekdays(scope));
+      if(scope==="schedule")updateRepeatOptions();
+      if(scope==="habit")updateHabitRepeatOptions();
+      if(scope==="stop")updateStopHabitRepeatOptions();
+    };
+  });
+
   document.getElementById("openPrincipleManager").onclick=openPrincipleManager;
   document.getElementById("finalSavePrincipleManager").onclick=finalizePrincipleManagerSave;
   document.getElementById("cancelPrincipleEditor").onclick=resetPrincipleEditor;
@@ -5838,6 +7208,8 @@ function bind(){
 
     data.principleLibraryRevision=(Number(data.principleLibraryRevision)||0)+1;
     data.tomorrowActionLibraryRevision=0;
+    data.principleLibraryCustomized=true;
+    data.principleLibrarySavedAt=new Date().toISOString();
     normalizeManagedPrincipleLibrary();
     saveData();
 
@@ -5876,7 +7248,14 @@ function bind(){
     const t=ensureToday(); t.agency="선택대로 행동 중";
     const ownerChoice=shakeValue("ownerChoice");
     if(ownerChoice)setDayChoices(t,[ownerChoice,...getDayChoices(t)],["",...getDayChoiceReasons(t)]);
-    saveData(); toast("주인다운 선택을 기록했습니다."); switchView("today"); resetShakeForm();
+    saveData();
+    renderAllLinkedViews();
+    showSaveState("shakeSaveStatus","저장되었습니다. 주인다운 선택이 오늘 기록에 반영되었습니다.");
+    toast("주인다운 선택을 기록했습니다.");
+    setTimeout(()=>{
+      switchView("today");
+      resetShakeForm();
+    },420);
   };
   for(let i=1;i<=3;i++){
     const evidenceSelect=document.getElementById(`dailyEvidence${i}`);
@@ -5899,7 +7278,11 @@ function bind(){
 
   document.getElementById("saveReflection").onclick=()=>{
     saveTodayDraftNow();
-    renderToday();
+    renderAllLinkedViews();
+    showSaveState(
+      "reflectionSaveStatus",
+      "저장되었습니다. 오늘의 마무리와 내일의 작은 행동이 날짜별 기록에 반영되었습니다."
+    );
     toast("오늘의 마무리를 저장했습니다.");
   };
   document.getElementById("prevMonth").onclick=()=>{
@@ -5930,6 +7313,11 @@ function bind(){
     setSchedulePeriod(button.dataset.schedulePeriodValue,button.dataset.schedulePeriodTarget)
   );
   document.getElementById("scheduleRepeatType").onchange=updateRepeatOptions;
+  document.getElementById("scheduleMonthlyMode").onchange=updateRepeatOptions;
+  ["scheduleMonthDay","scheduleMonthWeek","scheduleRepeatInterval","scheduleRepeatUntil"].forEach(id=>{
+    const control=document.getElementById(id);
+    if(control)control.onchange=updateRepeatOptions;
+  });
   document.getElementById("scheduleDate").onchange=()=>{
     const startDate=document.getElementById("scheduleDate").value||todayKey();
     const until=document.getElementById("scheduleRepeatUntil");
@@ -5938,9 +7326,11 @@ function bind(){
 
     if(startDisplay)startDisplay.value=startDate;
     if(monthDay)monthDay.value=String(dateFromKey(startDate).getDate());
+    setMonthlyWeekdayPicker("schedule",[dateFromKey(startDate).getDay()]);
     if(until&&(!until.value||until.value<startDate)){
       until.value=addMonthsToKey(startDate,12);
     }
+    updateRepeatOptions();
   };
   document.getElementById("scheduleHabitId").onchange=event=>{
     const habit=data.habits.find(item=>item.id===event.target.value);
@@ -5967,27 +7357,36 @@ function bind(){
     const endMinutes=minutesFromTime(endTime);
 
     if(endMinutes<=startMinutes){
+      showSaveState("scheduleSaveStatus","종료시간은 시작시간보다 뒤로 선택해주세요.","warning");
       toast("종료시간은 시작시간보다 뒤로 선택해주세요.");
       return;
     }
     if(kind==="habit"&&!habitId){
+      showSaveState("scheduleSaveStatus","배치할 습관을 선택해주세요.","warning");
       toast("배치할 습관을 선택해주세요.");
       return;
     }
 
     const title=kind==="habit"?(habit?.name||""):document.getElementById("scheduleTitle").value.trim();
     if(!title){
+      showSaveState("scheduleSaveStatus","제목을 입력해주세요.","warning");
       toast("제목을 입력해주세요.");
       return;
     }
 
     const repeat=collectRepeatRule();
     if(repeat.type!=="none"&&repeat.until<targetDate){
+      showSaveState("scheduleSaveStatus","반복 종료일은 시작 날짜 이후로 선택해주세요.","warning");
       toast("반복 종료일은 시작 날짜 이후로 선택해주세요.");
       return;
     }
     if(repeat.type==="weekly"&&!repeat.weekdays.length){
       repeat.weekdays=[dateFromKey(targetDate).getDay()];
+    }
+    if(repeat.type==="monthly"&&repeat.monthlyMode==="nthWeekday"&&!repeat.monthWeekdays.length){
+      showSaveState("scheduleSaveStatus","매월 반복할 요일을 한 개 이상 선택해주세요.","warning");
+      toast("매월 반복할 요일을 한 개 이상 선택해주세요.");
+      return;
     }
 
     const seriesId=existing?.seriesId||`series_${Date.now()}`;
@@ -6012,9 +7411,12 @@ function bind(){
         ));
       }
 
-      const habitDay=ensureDay(date);
-      const habitLevel=kind==="habit"?(habitDay.habitChecks||{})[habitId]||"":"";
-      const habitAction=kind==="habit"?habitActionForLevel(habit,habitLevel):"";
+      const storedDay=data.today?.[date]||null;
+      const habitLevel=kind==="habit"
+        ?(storedDay?.habitChecks||{})[habitId]||"normal":"";
+      const habitAction=kind==="habit"
+        ?habitActionForLevel(habit,habitLevel):"";
+
       const item={
         id:`${seriesId}_${date}_${index}`,
         seriesId:repeat.type==="none"?"":seriesId,
@@ -6029,7 +7431,7 @@ function bind(){
         memo:kind==="habit"
           ?(habitAction?`${habitLevelLabel(habitLevel)} · ${habitAction}`:"")
           :document.getElementById("scheduleMemo").value.trim(),
-        repeat:{...repeat},
+        repeat:{...repeat,startDate:targetDate},
         done:oldDoneByDate.get(date)||false
       };
       data.schedules.push(item);
@@ -6040,14 +7442,96 @@ function bind(){
     selectedCalendarDate=targetDate;
     calendarCursor=dateFromKey(targetDate);
     saveData();
-    document.getElementById("scheduleModal").classList.remove("show");
-    renderReview();
-    renderToday();
+    renderAllLinkedViews();
 
     const repeatMessage=repeat.type==="none"
       ?""
-      :` · ${created.length}회 반복 생성`;
-    toast(`${kind==="habit"?"습관을 배치했습니다.":"일정을 저장했습니다."}${repeatMessage}`);
+      :` · ${repeatLabel(repeat)} · ${created.length}회 생성`;
+    const message=
+      `저장되었습니다. ${kind==="habit"?"습관":"일정"}이 시간표에 반영되었습니다${repeatMessage}.`;
+
+    showSaveState("scheduleSaveStatus",message);
+    showSaveState("scheduleRecordStatus",message);
+    toast(message);
+
+    setTimeout(()=>{
+      document.getElementById("scheduleModal").classList.remove("show");
+    },420);
+  };
+
+  document.getElementById("addStopHabitBtn").onclick=()=>openStopHabitModal();
+  document.getElementById("saveStopHabitsToday").onclick=()=>saveStopHabitDailyRecord(todayKey());
+  document.getElementById("saveBehaviorStandards").onclick=()=>saveStopHabitDailyRecord(selectedCalendarDate||todayKey());
+
+  document.querySelectorAll("[data-stop-weekday]").forEach(button=>{
+    button.onclick=()=>{
+      button.classList.toggle("selected");
+      button.setAttribute("aria-pressed",button.classList.contains("selected")?"true":"false");
+      updateStopHabitRepeatPreview();
+    };
+  });
+
+  document.getElementById("stopRepeatType").onchange=updateStopHabitRepeatOptions;
+  document.getElementById("stopMonthlyMode").onchange=updateStopHabitRepeatOptions;
+  [
+    "stopRepeatStart","stopRepeatUntil","stopRepeatInterval",
+    "stopMonthDay","stopMonthWeek","stopExcludeSunday","stopExcludeHoliday"
+  ].forEach(id=>{
+    const control=document.getElementById(id);
+    if(control){
+      control.addEventListener("change",updateStopHabitRepeatOptions);
+      control.addEventListener("input",updateStopHabitRepeatOptions);
+    }
+  });
+
+  document.getElementById("saveStopHabit").onclick=()=>{
+    const repeat=collectStopHabitRepeatRule();
+    const name=shakeValue("stopHabitName");
+
+    if(!name){
+      showSaveState("stopHabitSaveStatus","멈출 행동 이름을 입력해주세요.","warning");
+      toast("멈출 행동 이름을 입력해주세요.");
+      return;
+    }
+    if(repeat.until<repeat.startDate){
+      showSaveState("stopHabitSaveStatus","반복 종료일은 시작일 이후로 선택해주세요.","warning");
+      toast("반복 종료일은 시작일 이후로 선택해주세요.");
+      return;
+    }
+    if(repeat.type==="weekly"&&!repeat.weekdays.length){
+      showSaveState("stopHabitSaveStatus","매주 반복할 요일을 한 개 이상 선택해주세요.","warning");
+      toast("매주 반복할 요일을 한 개 이상 선택해주세요.");
+      return;
+    }
+    if(repeat.type==="monthly"&&repeat.monthlyMode==="nthWeekday"&&!repeat.monthWeekdays.length){
+      showSaveState("stopHabitSaveStatus","매월 반복할 요일을 한 개 이상 선택해주세요.","warning");
+      toast("매월 반복할 요일을 한 개 이상 선택해주세요.");
+      return;
+    }
+
+    const item={
+      id:document.getElementById("stopHabitId").value||`stop_${Date.now()}`,
+      name,
+      identity:shakeValue("stopHabitIdentity")||"지금의 나",
+      trigger:shakeValue("stopHabitTrigger"),
+      stopAction:shakeValue("stopHabitAction"),
+      replacement:shakeValue("stopHabitReplacement"),
+      reflection:shakeValue("stopHabitReflection"),
+      repeat
+    };
+
+    const index=(data.stopHabits||[]).findIndex(entry=>entry.id===item.id);
+    if(index>=0)data.stopHabits[index]=item;
+    else data.stopHabits.push(item);
+
+    saveData();
+    renderAllLinkedViews();
+    switchHabitCategory("stop");
+    const message=`저장되었습니다. ${repeatLabel(repeat)} 조건으로 오늘의 멈출 행동에 연동됩니다.`;
+    showSaveState("stopHabitSaveStatus",message);
+    showSaveState("stopHabitsRecordStatus",message);
+    toast("멈출 행동을 저장했습니다.");
+    setTimeout(()=>document.getElementById("stopHabitModal").classList.remove("show"),420);
   };
 
   document.getElementById("addHabitBtn").onclick=()=>openHabitModal();
@@ -6059,16 +7543,28 @@ function bind(){
         "aria-pressed",
         button.classList.contains("selected")?"true":"false"
       );
-      updateHabitDaysPreview();
+      updateHabitRepeatPreview();
     };
   });
 
   document.getElementById("habitEveryDay").onclick=()=>{
     setHabitDaysPicker("매일");
+    document.getElementById("habitRepeatType").value="weekly";
+    updateHabitRepeatOptions();
   };
   document.getElementById("habitClearDays").onclick=()=>{
     setHabitDaysPicker("");
+    updateHabitRepeatPreview();
   };
+  document.getElementById("habitRepeatType").onchange=updateHabitRepeatOptions;
+  document.getElementById("habitMonthlyMode").onchange=updateHabitRepeatOptions;
+  ["habitRepeatStart","habitRepeatUntil","habitRepeatInterval","habitMonthDay","habitMonthWeek","habitExcludeSunday","habitExcludeHoliday"].forEach(id=>{
+    const control=document.getElementById(id);
+    if(control){
+      control.addEventListener("change",updateHabitRepeatOptions);
+      control.addEventListener("input",updateHabitRepeatOptions);
+    }
+  });
 
   document.querySelectorAll("[data-habit-period][data-habit-time-role]").forEach(button=>{
     button.onclick=()=>setHabitPeriod(
@@ -6087,9 +7583,26 @@ function bind(){
 
   document.getElementById("saveHabit").onclick=()=>{
     const timeRange=collectHabitTimeRange();
+    const repeat=collectHabitRepeatRule();
 
     if(!timeRange.valid){
+      showSaveState("habitSaveStatus","종료시간은 시작시간보다 늦게 선택해주세요.","warning");
       toast("종료시간은 시작시간보다 늦게 선택해주세요.");
+      return;
+    }
+    if(repeat.until<repeat.startDate){
+      showSaveState("habitSaveStatus","반복 종료일은 시작일 이후로 선택해주세요.","warning");
+      toast("반복 종료일은 시작일 이후로 선택해주세요.");
+      return;
+    }
+    if(repeat.type==="weekly"&&!repeat.weekdays.length){
+      showSaveState("habitSaveStatus","매주 반복할 요일을 한 개 이상 선택해주세요.","warning");
+      toast("매주 반복할 요일을 한 개 이상 선택해주세요.");
+      return;
+    }
+    if(repeat.type==="monthly"&&repeat.monthlyMode==="nthWeekday"&&!repeat.monthWeekdays.length){
+      showSaveState("habitSaveStatus","매월 반복할 요일을 한 개 이상 선택해주세요.","warning");
+      toast("매월 반복할 요일을 한 개 이상 선택해주세요.");
       return;
     }
 
@@ -6097,7 +7610,8 @@ function bind(){
       id:document.getElementById("habitId").value||`h${Date.now()}`,
       name:shakeValue("habitName"),
       identity:shakeValue("habitIdentity"),
-      days:collectHabitDays(),
+      days:habitDaysFromRepeat(repeat),
+      repeat,
       time:timeRange.text,
       startTime:timeRange.startText,
       endTime:timeRange.endText,
@@ -6106,46 +7620,54 @@ function bind(){
       minimum:shakeValue("habitMinimum"),
       recovery:shakeValue("habitRecovery")
     };
-    if(!obj.name){toast("습관 이름을 입력해주세요.");return;}
-    if(!obj.days){toast("실행할 요일을 한 개 이상 선택해주세요.");return;}
-    const i=data.habits.findIndex(h=>h.id===obj.id);
-    if(i>=0)data.habits[i]=obj;else data.habits.push(obj);
 
-    (data.schedules||[])
-      .filter(item=>item.kind==="habit"&&item.habitId===obj.id)
-      .forEach(item=>{
-        item.title=obj.name;
-        syncHabitScheduleContent(item.date,obj.id);
-      });
+    if(!obj.name){
+      showSaveState("habitSaveStatus","습관 이름을 입력해주세요.","warning");
+      toast("습관 이름을 입력해주세요.");
+      return;
+    }
+
+    const index=data.habits.findIndex(habit=>habit.id===obj.id);
+    if(index>=0)data.habits[index]=obj;
+    else data.habits.push(obj);
+
+    const created=rebuildHabitAutoScheduleSeries(obj.id);
 
     const todayDay=ensureToday();
     if(!todayDay.habitChecks[obj.id]){
       todayDay.habitChecks[obj.id]="normal";
     }
-    applyHabitDefinitionToDate(obj.id,todayKey(),true);
+    syncHabitScheduleContent(todayKey(),obj.id);
 
     saveData();
-    document.getElementById("habitModal").classList.remove("show");
-    renderHabits();
-    renderToday();
-    renderReview();
+    renderAllLinkedViews();
 
-    const reflected=habitAppliesToDate(obj,todayKey());
-    toast(
-      reflected
-        ?"습관을 저장하고 오늘 일정에 반영했습니다."
-        :"습관을 저장했습니다. 오늘은 선택한 실행 요일이 아닙니다."
-    );
+    const message=
+      `저장되었습니다. ${repeatLabel(repeat)} 조건으로 `+
+      `${created.length}개의 습관 일정을 연동했습니다.`;
+
+    showSaveState("habitSaveStatus",message);
+    showSaveState("habitsRecordStatus",message);
+    toast("습관을 저장하고 일정에 연동했습니다.");
+
+    setTimeout(()=>{
+      document.getElementById("habitModal").classList.remove("show");
+    },420);
   };
   document.getElementById("editIdentity").onclick=()=>{
     document.getElementById("identityTitleInput").value=data.identity.title;
     document.getElementById("identityBodyInput").value=data.identity.body;
+    clearSaveState("identitySaveStatus");
     document.getElementById("identityModal").classList.add("show");
   };
   document.getElementById("saveIdentity").onclick=()=>{
     data.identity.title=shakeValue("identityTitleInput");
     data.identity.body=shakeValue("identityBodyInput");
-    saveData();document.getElementById("identityModal").classList.remove("show");renderIdentity();renderToday();toast("정체성을 저장했습니다.");
+    saveData();
+    renderAllLinkedViews();
+    showSaveState("identitySaveStatus","저장되었습니다. 정체성 탭과 오늘 탭에 반영되었습니다.");
+    toast("정체성을 저장했습니다.");
+    setTimeout(()=>document.getElementById("identityModal").classList.remove("show"),420);
   };
   document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).classList.remove("show"));
   document.querySelectorAll(".modal").forEach(m=>m.onclick=e=>{if(e.target===m)m.classList.remove("show");});
@@ -6159,6 +7681,7 @@ function bind(){
     }
     const blob=new Blob([json],{type:"application/json"});
     const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=filename;a.click();URL.revokeObjectURL(a.href);
+    showSaveState("settingsSaveStatus","백업 파일을 저장했습니다.");
   };
   document.getElementById("importData").onchange=e=>{
     const f=e.target.files[0];if(!f)return;
@@ -6171,6 +7694,7 @@ function bind(){
       renderIdentity();
       renderHabits();
       renderReview();
+      showSaveState("settingsSaveStatus","데이터를 가져오고 모든 연결 화면을 동기화했습니다.");
       toast("데이터를 가져오고 원칙 드롭다운을 동기화했습니다.");
     }catch(err){
       alert("올바른 데이터 파일이 아닙니다.");
@@ -6195,7 +7719,13 @@ function bind(){
     }
   });
 }
-bind(); renderIdentity(); renderToday(); renderHabits(); renderReview(); syncFromServer();
+bind();
+auditLinkedAppData();
+renderIdentity();
+renderToday();
+renderHabits();
+renderReview();
+syncFromServer();
 
 </script>
 

@@ -7,7 +7,7 @@
   <meta name="description" content="내 삶의 주인으로 살아가기 위한 정체성·습관·복귀 시스템" />
   
   
-  <title>수처작주 | 내 삶의 주인 · v4.4.9</title>
+  <title>수처작주 | 내 삶의 주인 · v4.5.0</title>
   <style>
     :root{
       --bg:#f4f2ec; --surface:#fffdf8; --ink:#20302b; --muted:#6e7773;
@@ -1991,6 +1991,43 @@
       margin-bottom:12px;
     }
 
+
+    .principle-manager-final-save{
+      position:sticky;
+      bottom:-1px;
+      z-index:8;
+      margin:12px -2px -2px;
+      padding:10px 2px 2px;
+      border-top:1px solid var(--line);
+      background:linear-gradient(
+        to bottom,
+        rgba(255,253,248,.86),
+        #fffdf8 26%
+      );
+      backdrop-filter:blur(8px);
+    }
+    .principle-manager-final-save button{
+      min-height:48px;
+      margin:0;
+      font-size:.9rem;
+      font-weight:950;
+      box-shadow:0 7px 18px rgba(23,63,53,.18);
+    }
+    .principle-manager-save-status{
+      min-height:22px;
+      margin:0 0 7px;
+      color:var(--brand);
+      font-size:.76rem;
+      font-weight:900;
+      text-align:center;
+      line-height:1.4;
+    }
+    .principle-manager-save-status.success{
+      padding:7px 9px;
+      border-radius:10px;
+      background:#e7f3ee;
+    }
+
 </style>
 
   <meta name="theme-color" content="#173f35" />
@@ -1999,11 +2036,12 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="수처작주" />
   <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" href="./icons/icon-192.png" sizes="192x192" type="image/png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
   <link rel="apple-touch-icon" href="./icons/icon-192.png" />
   <meta name="application-name" content="수처작주 입처개진" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
 </head>
 <body>
 <div class="app">
@@ -2392,6 +2430,11 @@
     <div class="principle-sync-note">저장한 원칙은 오늘 원칙·오늘의 마무리·내일의 작은 행동 드롭다운에 즉시 함께 반영됩니다.</div>
     <div class="principle-manager-summary" id="principleManagerSummary"></div>
     <div id="principleManagerList" class="principle-manager-list"></div>
+
+    <div class="principle-manager-final-save">
+      <div class="principle-manager-save-status" id="principleManagerSaveStatus" role="status" aria-live="polite"></div>
+      <button class="primary wide" type="button" id="finalSavePrincipleManager">최종 저장</button>
+    </div>
   </div>
 </div>
 
@@ -5481,11 +5524,41 @@ function replacePrincipleInSavedRecords(oldText,newText){
   });
 }
 
+
+function finalizePrincipleManagerSave(){
+  managedPrincipleOptions();
+  data.principleLibraryRevision=
+    Math.max(1,Number(data.principleLibraryRevision)||0)+1;
+  data.tomorrowActionLibraryRevision=0;
+
+  saveData();
+  refreshAllPrincipleDropdowns();
+  renderPrincipleManager();
+  renderIdentity();
+  renderToday();
+  renderReview();
+
+  const saveStatus=document.getElementById("principleManagerSaveStatus");
+  if(saveStatus){
+    saveStatus.textContent="저장되었습니다.";
+    saveStatus.classList.add("success");
+  }
+
+  toast("저장되었습니다.");
+}
+
 function openPrincipleManager(){
   managedPrincipleOptions();
   localStorage.setItem(STORAGE_KEY,JSON.stringify(data));
   resetPrincipleEditor();
   renderPrincipleManager();
+
+  const saveStatus=document.getElementById("principleManagerSaveStatus");
+  if(saveStatus){
+    saveStatus.textContent="";
+    saveStatus.classList.remove("success");
+  }
+
   document.getElementById("principleManagerModal").classList.add("show");
 }
 
@@ -5689,6 +5762,7 @@ function bind(){
   document.querySelectorAll(".nav-btn").forEach(b=>b.onclick=()=>switchView(b.dataset.view));
 
   document.getElementById("openPrincipleManager").onclick=openPrincipleManager;
+  document.getElementById("finalSavePrincipleManager").onclick=finalizePrincipleManagerSave;
   document.getElementById("cancelPrincipleEditor").onclick=resetPrincipleEditor;
   document.getElementById("confirmPrincipleDelete").onclick=()=>{
     const index=Number(document.getElementById("pendingPrincipleDeleteIndex").value);
@@ -5697,6 +5771,11 @@ function bind(){
       document.getElementById("pendingPrincipleDeleteIndex").value="-1";
       document.getElementById("principleDeletePreview").textContent="";
       toast("원칙을 선택 목록에서 삭제했습니다.");
+    const finalSaveStatus=document.getElementById("principleManagerSaveStatus");
+    if(finalSaveStatus){
+      finalSaveStatus.textContent="변경사항이 있습니다. 아래의 최종 저장 버튼을 눌러주세요.";
+      finalSaveStatus.classList.remove("success");
+    }
     }
   };
   document.getElementById("savePrincipleEditor").onclick=()=>{
@@ -5765,6 +5844,12 @@ function bind(){
     resetPrincipleEditor();
     renderPrincipleManager();
     refreshAllPrincipleDropdowns();
+
+    const finalSaveStatus=document.getElementById("principleManagerSaveStatus");
+    if(finalSaveStatus){
+      finalSaveStatus.textContent="변경사항이 있습니다. 아래의 최종 저장 버튼을 눌러주세요.";
+      finalSaveStatus.classList.remove("success");
+    }
 
     toast(
       original
